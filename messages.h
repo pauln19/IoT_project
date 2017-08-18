@@ -23,12 +23,17 @@ typedef nx_struct sub_item {
     nx_uint8_t qos;
 } my_sub_item
 
+typedef nx_struct pub_item {
+    topic_t topic;
+    nx_uint16 payload;
+    nx_uint8_t qos    
+} my_pub_item
+
 typedef nx_struct my_msg {
     nx_uint16_t id;
     nx_uint8_t msg_type;
-    nx_uint16_t address_id;
-    topic_t topic;
-    nx_uint16 payload;
+    my_pub_item pub_payload
+    nx_uint8_t numOfSubs;
     my_sub_item[3] subscriptions;
 } my_msg_t;
 
