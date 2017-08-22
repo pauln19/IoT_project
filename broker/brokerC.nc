@@ -25,11 +25,11 @@ implementation{
 
   //This part is done in order to keep track of the subscriptions and to loop on them
 
-  my_sub_t[256] tempSub;
+  my_sub_t tempSub[256];
   uint8_t numTempSub = 0;
-  my_sub_t[256] humSub;
+  my_sub_t humSub[256];
   uint8_t numHumSub = 0;
-  my_sub_t[256] lumSub;
+  my_sub_t lumSub[256];
   uint8_t numLumSub = 0;
   /*
   void sendACK(uint16_t id, uint16_t address, uint8_t ackType){
@@ -37,9 +37,9 @@ implementation{
   message_t packetAck;
 
   simple_msg_t* ack = (simple_msg_t*) (call Packet.getPayload(&packetAck, sizeof(simple_msg_t)));
-  ack.id = id;
-  ack.simple_msg_type = ackType;
-  ack.address = TOS_NODE_ID;
+  ack->id = id;
+  ack->simple_msg_type = ackType;
+  ack->address = TOS_NODE_ID;
 
   if(call SendSimpleMsg.send(address, &packetAck, sizeof(simple_msg_t)) == SUCCESS){
   printf("broker: Send %d to %d\n", ackType, sourceAddr);
@@ -47,19 +47,19 @@ implementation{
 }
 }
 */
-void forwardPublish(my_sub_t[256] subscribers, uint8_t numOfSubs, message_t* msg){
+void forwardPublish(my_sub_t subscribers[256], uint8_t numOfSubs, message_t* msg){
   uint8_t i;
   publish_msg_t* publishMsg = (publish_msg_t*) msg;
 
   for(i=0; i<numOfSubs; i++){
 
-    publishMsg.qos = subscribers[i].qos;
+    publishMsg->qos = subscribers[i].qos;
 
-    if(publishMsg.qos)
+    if(publishMsg->qos)
     call PacketAcknowledgments.requestAck(&msg);
 
-    if(call SendPub.send(subscribers[i].address_id, msg, sizeof(publish_msg_t)) == SUCCESS){
-      printf("broker: forwardPublish %d to %d\n", publishMsg.id, subscribers[i].address_id);
+    if(call AMSend.send(subscribers[i].address_id, msg, sizeof(publish_msg_t)) == SUCCESS){
+      printf("broker: forwardPublish %d to %d\n", publishMsg->id, subscribers[i].address_id);
       printfflush();
     }
 
@@ -73,15 +73,15 @@ event message_t* ReceiveSub.receive(message_t* packet, void* payload, uint8_t le
   uint8_t i;
   subscribe_msg_t* msg = (subscribe_msg_t*) payload;
 
-  uint16_t sourceAddr = msg.address;
-  printf("broker: Received SUB - id: %d _ from: %d\n", msg.id, sourceAddr);
+  uint16_t sourceAddr = msg->address;
+  printf("broker: Received SUB - id: %d _ from: %d\n", msg->id, sourceAddr);
   printfflush();
 
-  for (i=0; i<msg.numOfSubs; i++){
-    sub_item_t incomingSub = msg.subscriptions[i];
+  for (i=0; i<msg->numOfSubs; i++){
+    sub_item_t incomingSub = msg->subscriptions[i];
     my_sub_t sub;
-    sub.address_id = sourceAddr;
-    sub.qos = incomingSub.qos;
+    sub.address_id = (nx_uint16_t) sourceAddr;
+    sub.qos = (nx_bool) incomingSub.qos;
 
     printf("broker: Saving SUB of %d to topic %d", sourceAddr, incomingSub.topic);
     printfflush();
@@ -98,7 +98,7 @@ event message_t* ReceiveSub.receive(message_t* packet, void* payload, uint8_t le
     }
   }
   /*
-  sendACK(msg.id, sourceAddr, SUBACK);
+  sendACK(msg->id, sourceAddr, SUBACK);
   */
   return packet;
 }
@@ -106,20 +106,20 @@ event message_t* ReceiveSub.receive(message_t* packet, void* payload, uint8_t le
 event message_t* ReceiveConnectMsg.receive(message_t* packet, void* payload, uint8_t len){
   connect_msg_t* msg = (connect_msg_t*) payload;
 
-  uint16_t sourceAddr = msg.address;
-  /*switch (msg.simple_msg_type){
+  uint16_t sourceAddr = msg->address;
+  /*switch (msg->simple_msg_type){
   case CONNECT:
-  printf("broker: Received CONNECT - id: %d _ from: %d\n", msg.id, sourceAddr);
+  printf("broker: Received CONNECT - id: %d _ from: %d\n", msg->id, sourceAddr);
   printfflush();
 
-  sendACK(msg.id, sourceAddr, CONNACK);
+  sendACK(msg->id, sourceAddr, CONNACK);
 
   case PUBACK:
-  printf("broker: Received PUBACK - id: %d _ from: %d\n", msg.id, sourceAddr);
+  printf("broker: Received PUBACK - id: %d _ from: %d\n", msg->id, sourceAddr);
   printfflush();
   }*/
 
-  printf("broker: Received CONNECT - id: %d _ from: %d\n", msg.id, sourceAddr);
+  printf("broker: Received CONNECT - id: %d _ from: %d\n", msg->id, sourceAddr);
   printfflush();
 
   // trovare modo di "salvare" una publish e rimandarla eventualmente se non si riceve la puback
@@ -131,14 +131,14 @@ event message_t* ReceiveConnectMsg.receive(message_t* packet, void* payload, uin
 event message_t* ReceivePub.receive(message_t* packet, void* payload, uint8_t len){
   publish_msg_t* msg = (publish_msg_t*) payload;
 
-  uint16_t sourceAddr = msg.address;
-  printf("broker: Received PUB - id: %d _ from: %d\n", msg.id, sourceAddr);
+  uint16_t sourceAddr = msg->address;
+  printf("broker: Received PUB - id: %d _ from: %d\n", msg->id, sourceAddr);
   printfflush();
 
-  /*if(msg.qos)
-  sendACK(msg.id, sourceAddr, PUBACK);*/
+  /*if(msg->qos)
+  sendACK(msg->id, sourceAddr, PUBACK);*/
 
-  switch (msg.topic){
+  switch (msg->topic){
     case (TEMPERATURE):
     forwardPublish(tempSub, numTempSub, packet);
 
@@ -172,10 +172,10 @@ event void SplitControl.startDone(error_t err)
 
 event void AMSend.sendDone(message_t* msg, error_t err)
 {
-  publish_msg_t publishMsg = (publish_msg_t) msg;
+  publish_msg_t* publishMsg = (publish_msg_t*) msg;
 
-  if(publishMsg.qos && !(call PacketAcknowledgments.wasAcked(msg))){
-    call SendPub.send((call AMPacket.destination(&msg)), msg, sizeof(publish_msg_t));
+  if(publishMsg->qos && !(call PacketAcknowledgments.wasAcked(msg))){
+    call AMSend.send((call AMPacket.destination(msg)), msg, sizeof(publish_msg_t));
   }
 }
 

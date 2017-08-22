@@ -24,13 +24,13 @@ implementation {
   //  brokerC.SendConnectMsg -> SendConnectMsg;
     brokerC.ReceiveConnectMsg -> RecConnectMsg;
 
-    brokerC.SendPub -> SendPub;
+    brokerC.AMSend -> SendPub;
     brokerC.ReceivePub -> RecPub;
 
     brokerC.ReceiveSub -> RecSub;
 
     brokerC.PacketAcknowledgments -> ActiveMessageC;
-    brokerC.AMPacket -> SendConnectMsg;
-    brokerC.Packet -> SendConnectMsg;
+    brokerC.AMPacket -> SendPub;
+    brokerC.Packet -> SendPub;
 
 }
