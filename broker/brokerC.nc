@@ -1,14 +1,21 @@
 #include "messages.h"
+#include "printf.h"
 
-module pubSubC {
+module brokerC {
     uses{
+        
         interface Boot;
-        interface Receive;
-        interface AMSend;
-        interface AMPacket;
-        interface Packet;
-        interface PacketAcknowledgements;
         interface SplitControl;
+        
+        interface Receive as ReceiveSub;
+        interface Receive as ReceivePub;
+        interface Receive as ReceiveSimpleMsg;
+
+        interface AMSend as SendSimpleMsg;
+        interface AMSend as SendPub;
+
+        interface Packet;
+        
     }
 }
 
@@ -25,7 +32,8 @@ implementation{
     {
 	    my_msg_t* mess = (my_msg_t*) payload;
 	    nx_uint8_t type = mess->msg_type;
-        
+        message_t packetAck;
+
         if (type == CONNECT){
             am_addr_t sourceAddr = call AMPacket.source(&packet);
             my_msg_t* ack = (my_msg_t*) (call Packet.getPayload(&packetAck, sizeof(my_msg_t)));

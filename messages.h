@@ -1,41 +1,44 @@
-
 #ifndef MESSAGES_H
 #define MESSAGES_H
 
-typedef enum topic {TEMPERATURE=1, HUMIDITY=2, LUMINOSITY=3} topic_t;
+enum {TEMPERATURE=0, HUMIDITY=1, LUMINOSITY=2};
+enum {CONNACK=0, SUBACK=1, PUBACK=2, CONNECT=4};
 
-#define CONNECT 1
-#define SUBSCRIBE 2
-#define PUBLISH 3
-#define CONNACK 4
-#define SUBACK 5
-#define PUBACK 6
-
-#define BROKER 0
-
-typedef nx_struct my_sub {
-    nx_uint16_t address_id;
-    nx_uint8_t qos;
-} my_sub_t
+typedef struct my_sub {
+    uint16_t address_id;
+    bool qos;
+} my_sub_t;
 
 typedef nx_struct sub_item {
-    topic_t topic;
-    nx_uint8_t qos;
-} my_sub_item
+    nx_uint8_t topic;
+    nx_bool qos;
+} sub_item_t;
 
-typedef nx_struct pub_item {
-    topic_t topic;
-    nx_uint16 payload;
-    nx_uint8_t qos    
-} my_pub_item
-
-typedef nx_struct my_msg {
+typedef nx_struct simple_msg {
+    nx_uint16_t address;
     nx_uint16_t id;
-    nx_uint8_t msg_type;
-    my_pub_item pub_payload
-    nx_uint8_t numOfSubs;
-    my_sub_item[3] subscriptions;
-} my_msg_t;
+    nx_uint8_t simple_msg_type;
+} simple_msg_t;
 
+typedef nx_struct subscribe_msg {
+    nx_uint16_t address;
+    nx_uint16_t id;
+    nx_uint8_t numOfSubs;    
+    my_sub_item[3] subscriptions;    
+} subscribe_msg_t;
+
+typedef nx_struct publish_msg {
+    nx_uint16_t address;
+    nx_uint16_t id;
+    nx_uint8_t topic;
+    nx_uint16_t payload;
+    nx_bool qos;   
+} publish_msg_t;
+
+enum {
+    AM_SIMPLE_MSG = 6,
+    AM_SUBSCRIBE_MSG = 10,
+    AM_PUBLISH_MSG = 14
+};
 
 #endif
