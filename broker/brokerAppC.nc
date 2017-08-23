@@ -10,7 +10,7 @@ implementation {
     components PrintfC;
     components SerialStartC;
 
-  //  components new AMSenderC(AM_CONNECT_MSG) as SendConnectMsg;
+    components new AMSenderC(AM_CONNECT_MSG) as SendConnectAck;
     components new AMReceiverC(AM_CONNECT_MSG) as RecConnectMsg;
 
     components new AMSenderC(AM_PUBLISH_MSG) as SendPub;
@@ -21,10 +21,10 @@ implementation {
     brokerC.Boot -> MainC.Boot;
     brokerC.SplitControl -> ActiveMessageC;
 
-  //  brokerC.SendConnectMsg -> SendConnectMsg;
+    brokerC.SendConnectAck -> SendConnectAck;
     brokerC.ReceiveConnectMsg -> RecConnectMsg;
 
-    brokerC.AMSend -> SendPub;
+    brokerC.SendPub -> SendPub;
     brokerC.ReceivePub -> RecPub;
 
     brokerC.ReceiveSub -> RecSub;

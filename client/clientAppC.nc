@@ -6,32 +6,38 @@ implementation {
 
     components MainC;
     components clientC;
+    components RandomC;
     components ActiveMessageC;
     components PrintfC;
     components SerialStartC;
     
-    components new AMSenderC(AM_SIMPLE_MSG) as SendSimpleMsg;
-    components new AMReceiverC(AM_SIMPLE_MSG) as RecSimpleMsg;
+    components new AMSenderC(AM_CONNECT_MSG) as SendConnectMsg;
+    components new AMReceiverC(AM_CONNECT_MSG) as RecConnAck;
     
     components new AMSenderC(AM_PUBLISH_MSG) as SendPub;
     components new AMReceiverC(AM_PUBLISH_MSG) as RecPub;
     
     components new AMSenderC(AM_SUBSCRIBE_MSG) as SendSub;
 
-    components new TimerMilliC() as Timer;
+    components new TimerMilliC() as TimerPub;
 
     clientC.Boot -> MainC.Boot;
     clientC.SplitControl -> ActiveMessageC;
 
-    clientC.SendSimpleMsg -> SendSimpleMsg;
-    clientC.ReceiveSimpleMsg -> RecSimpleMsg;
+    clientC.Read -> RandomC;
+    RandomC <- MainC.SoftwareInit;
+
+    clientC.SendConnecteMsg -> SendConnectMsg;
+    clientC.ReceiveConnAck -> RecConnAck;
 
     clientC.SendPub -> SendPub;
     clientC.ReceivePub -> RecPub;
 
     clientC.SendSub -> SendSub;
 
+    clientC.PacketAcknowledgements -> ActiveMessageC;
+    clientC.AMPacket -> SendPub;
     clientC.Packet -> SendSimpleMsg;
 
-    clientC.Timer -> Timer;
+    clientC.TimerPub -> TimerPub;
 }

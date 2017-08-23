@@ -2,7 +2,9 @@
 #define MESSAGES_H
 
 enum {TEMPERATURE=0, HUMIDITY=1, LUMINOSITY=2};
-//enum {CONNACK=0, SUBACK=1, PUBACK=2, CONNECT=4};
+enum {CONNACK=0, CONNECT=1};
+
+#define 
 
 typedef struct my_sub {
     uint16_t address_id;
@@ -17,7 +19,7 @@ typedef nx_struct sub_item {
 typedef nx_struct connect_msg {
     nx_uint16_t address;
     nx_uint16_t id;
-    //nx_uint8_t connect_msg_type;
+    nx_uint8_t connect_msg_type;
 } connect_msg_t;
 
 typedef nx_struct subscribe_msg {
