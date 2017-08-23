@@ -4,8 +4,6 @@
 enum {TEMPERATURE=0, HUMIDITY=1, LUMINOSITY=2};
 enum {CONNACK=0, CONNECT=1};
 
-#define 
-
 typedef struct my_sub {
     uint16_t address_id;
     bool qos;

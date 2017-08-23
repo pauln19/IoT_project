@@ -27,7 +27,7 @@ module clientC {
 implementation {
   
   uint16_t counter = 0;
-  uint16_t brokerAddress;
+  uint16_t brokerAddress = 1;
 
   event void Boot.booted()
   {
@@ -52,12 +52,13 @@ implementation {
   task void sendSubscribe() 
   {
     message_t packet;
-
+    uint32_t subCounter = 0;
+    int tmpId = TOS_NODE_ID;
+    
     subscribe_msg_t* msg = (subscribe_msg_t*) (call Packet.getPayload(&packet, sizeof(subscribe_msg_t)));
     msg->id = counter++;
     msg->address = TOS_NODE_ID;
-    uint8_t subCounter = 0;
-    int tmpId = TOS_NODE_ID;
+    
 
     // Pseudo random choice of subscription and qos
     while(tmpId >= 0 && subCounter < 3) {
@@ -70,11 +71,13 @@ implementation {
           item.topic = HUMIDITY;
         case 2:
           item.topic = LUMINOSITY;
+      }
 
-      if ((call Read.rand16()) % 2 == 0):
-        item.qos = false;  
+      if ((call Read.rand16()) % 2 == 0)
+      {
+        item.qos = 0;  
       } else {
-        item.qos = true;
+        item.qos = 1;
       } 
       msg->subscriptions[subCounter] = item;
       subCounter ++;
@@ -102,7 +105,8 @@ implementation {
       call SplitControl.start();
     }
   }
-
+  
+  event void SplitControl.stopDone(error_t err) {}
 
   event message_t* ReceivePub.receive(message_t* packet, void* payload, uint8_t len){
     publish_msg_t* msg = (publish_msg_t*) payload;
@@ -115,10 +119,11 @@ implementation {
     printf("client_%d: -- payload %d", TOS_NODE_ID, msg->payload);
 
     printfflush();
+    return packet;
   }
 
   event message_t* ReceiveConnAck.receive(message_t* packet, void* payload, uint8_t len){
-    connect_msg_t* msg = (connect_msg_t*) payload;
+    /*connect_msg_t* msg = (connect_msg_t*) payload;
     
     if (msg->connect_msg_type == CONNACK) {
       brokerAddress = msg->address;
@@ -128,7 +133,8 @@ implementation {
       post sendSubscribe();
 
       call TimerPub.startPeriodic(3000); //start sendig PUBLISH
-    }
+    }*/
+    return packet;
   }
 
   event void SendConnectMsg.sendDone(message_t* msg, error_t err)
@@ -137,7 +143,15 @@ implementation {
       call SendConnectMsg.send(AM_BROADCAST_ADDR, msg, sizeof(connect_msg_t));
       printf("client_%d: Resend CONNECT\n", TOS_NODE_ID);
       printfflush();
-    } 
+    }
+    else {
+      printf("client_%d: Received CONNACK\n", TOS_NODE_ID);
+      printfflush();
+
+      post sendSubscribe();
+
+      call TimerPub.startPeriodic(3000); //start sendig PUBLISH
+    }
   }
 
   event void SendSub.sendDone(message_t* msg, error_t err)
@@ -176,22 +190,23 @@ implementation {
     //statically choose the topic for publish
     switch (TOS_NODE_ID%3) {
       case 0:
-        msg.topic = TEMPERATURE;
+        msg->topic = TEMPERATURE;
       case 1:
-        msg.topic = HUMIDITY;
+        msg->topic = HUMIDITY;
       case 2:
-        msg.topic = LUMINOSITY;
+        msg->topic = LUMINOSITY;
     }
 
     //randomize the qos
-    if ((call Read.rand16()) % 2 == 0):
-      msg.qos = false;  
+    if ((call Read.rand16()) % 2 == 0)
+    {
+      msg->qos = 0;  
     } else {
-      msg.qos = true;
+      msg->qos = 1;
       call PacketAcknowledgements.requestAck(&packet);
     } 
 
-    msg.payload = call Read.rand16();
+    msg->payload = call Read.rand16();
 
     if(call SendPub.send(brokerAddress, &packet, sizeof(publish_msg_t)) == SUCCESS){
       printf("client_%d: Send PUBLISH - msg_id: %d\n", TOS_NODE_ID, msg->id);
@@ -200,5 +215,5 @@ implementation {
       printf("client_%d: -- qos %d", TOS_NODE_ID, msg->qos);
       printfflush();
     }
-
+  }
 }

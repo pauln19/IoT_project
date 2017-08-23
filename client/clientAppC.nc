@@ -27,7 +27,7 @@ implementation {
     clientC.Read -> RandomC;
     RandomC <- MainC.SoftwareInit;
 
-    clientC.SendConnecteMsg -> SendConnectMsg;
+    clientC.SendConnectMsg -> SendConnectMsg;
     clientC.ReceiveConnAck -> RecConnAck;
 
     clientC.SendPub -> SendPub;
@@ -37,7 +37,7 @@ implementation {
 
     clientC.PacketAcknowledgements -> ActiveMessageC;
     clientC.AMPacket -> SendPub;
-    clientC.Packet -> SendSimpleMsg;
+    clientC.Packet -> SendPub;
 
     clientC.TimerPub -> TimerPub;
 }

@@ -42,7 +42,7 @@ implementation{
     conn->address = TOS_NODE_ID;
 
     if(call SendConnectAck.send(destAddress, &packet, sizeof(connect_msg_t)) == SUCCESS){
-      printf("broker: Send CONNACK to %d\n", ackType, destAddress);
+      printf("broker: Send CONNACK to %d\n", destAddress);
       printfflush();
     }
   }
@@ -105,22 +105,11 @@ implementation{
     connect_msg_t* msg = (connect_msg_t*) payload;
 
     uint16_t sourceAddr = msg->address;
-    /*switch (msg->simple_msg_type){
-    case CONNECT:
-    printf("broker: Received CONNECT - id: %d _ from: %d\n", msg->id, sourceAddr);
-    printfflush();
-
-    sendACK(msg->id, sourceAddr, CONNACK);
-
-    case PUBACK:
-    printf("broker: Received PUBACK - id: %d _ from: %d\n", msg->id, sourceAddr);
-    printfflush();
-    }*/
 
     printf("broker: Received CONNECT - from: %d\n", sourceAddr);
     printfflush();
 
-
+    //sendACK(msg->id, sourceAddr);
 
     // trovare modo di "salvare" una publish e rimandarla eventualmente se non si riceve la puback
 
