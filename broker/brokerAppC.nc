@@ -29,7 +29,7 @@ implementation {
 
     brokerC.ReceiveSub -> RecSub;
 
-    brokerC.PacketAcknowledgments -> ActiveMessageC;
+    brokerC.PacketAcknowledgements -> ActiveMessageC;
     brokerC.AMPacket -> SendPub;
     brokerC.Packet -> SendPub;
 

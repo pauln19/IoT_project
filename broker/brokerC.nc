@@ -14,7 +14,7 @@ module brokerC {
     //interface AMSend as SendConnectMsg;
     interface AMSend; //as SendPub;
 
-    interface PacketAcknowledgments;
+    interface PacketAcknowledgements;
     interface AMPacket;
     interface Packet;
 
@@ -56,7 +56,7 @@ void forwardPublish(my_sub_t subscribers[256], uint8_t numOfSubs, message_t* msg
     publishMsg->qos = subscribers[i].qos;
 
     if(publishMsg->qos)
-    call PacketAcknowledgments.requestAck(&msg);
+    call PacketAcknowledgements.requestAck(msg);
 
     if(call AMSend.send(subscribers[i].address_id, msg, sizeof(publish_msg_t)) == SUCCESS){
       printf("broker: forwardPublish %d to %d\n", publishMsg->id, subscribers[i].address_id);
@@ -174,7 +174,7 @@ event void AMSend.sendDone(message_t* msg, error_t err)
 {
   publish_msg_t* publishMsg = (publish_msg_t*) msg;
 
-  if(publishMsg->qos && !(call PacketAcknowledgments.wasAcked(msg))){
+  if(publishMsg->qos && !(call PacketAcknowledgements.wasAcked(msg))){
     call AMSend.send((call AMPacket.destination(msg)), msg, sizeof(publish_msg_t));
   }
 }
