@@ -8,8 +8,8 @@ implementation {
     components clientC;
     components RandomC;
     components ActiveMessageC;
-    components PrintfC;
-    components SerialStartC;
+    //components PrintfC;
+    //components SerialStartC;
     
     components new AMSenderC(AM_CONNECT_MSG) as SendConnectMsg;
     components new AMReceiverC(AM_CONNECT_MSG) as RecConnAck;

@@ -1,5 +1,5 @@
 #include "messages.h"
-#include "printf.h"
+//#include "printf.h"
 
 module brokerC {
   uses{
@@ -32,6 +32,9 @@ implementation{
   my_sub_t lumSub[256];
   uint8_t numLumSub = 0;
   
+  uint16_t clients[256];
+  uint8_t nClients = 0;
+  
   void sendACK(uint16_t id, uint16_t destAddress){
 
     message_t packet;
@@ -40,10 +43,10 @@ implementation{
     conn->id = id;
     conn->connect_msg_type = CONNACK;
     conn->address = TOS_NODE_ID;
-
+    //call PacketAcknowledgements.requestAck(&packet);
     if(call SendConnectAck.send(destAddress, &packet, sizeof(connect_msg_t)) == SUCCESS){
-      printf("broker: Send CONNACK to %d\n", destAddress);
-      printfflush();
+      //printf("broker: Send CONNACK to %d\n", destAddress);
+      //printfflush();
     }
   }
 
@@ -56,11 +59,11 @@ implementation{
       publishMsg->qos = subscribers[i].qos;
 
       if(publishMsg->qos)
-        call PacketAcknowledgements.requestAck(msg);
+        //call PacketAcknowledgements.requestAck(msg);
 
       if(call SendPub.send(subscribers[i].address_id, msg, sizeof(publish_msg_t)) == SUCCESS){
-        printf("broker: forwardPublish %d to %d\n", publishMsg->id, subscribers[i].address_id);
-        printfflush();
+        //printf("broker: forwardPublish %d to %d\n", publishMsg->id, subscribers[i].address_id);
+        //printfflush();
       }
 
     }
@@ -71,8 +74,8 @@ implementation{
     subscribe_msg_t* msg = (subscribe_msg_t*) payload;
 
     uint16_t sourceAddr = msg->address;
-    printf("broker: Received SUB - id: %d _ from: %d\n", msg->id, sourceAddr);
-    printfflush();
+    //printf("broker: Received SUB - id: %d _ from: %d\n", msg->id, sourceAddr);
+    //printfflush();
 
     for (i=0; i<msg->numOfSubs; i++){
       sub_item_t incomingSub = msg->subscriptions[i];
@@ -80,8 +83,8 @@ implementation{
       sub.address_id = (nx_uint16_t) sourceAddr;
       sub.qos = (nx_bool) incomingSub.qos;
 
-      printf("broker: Saving SUB of %d to topic %d", sourceAddr, incomingSub.topic);
-      printfflush();
+      //printf("broker: Saving SUB of %d to topic %d", sourceAddr, incomingSub.topic);
+      //printfflush();
 
       switch (incomingSub.topic){
         case (TEMPERATURE):
@@ -103,13 +106,21 @@ implementation{
 
   event message_t* ReceiveConnectMsg.receive(message_t* packet, void* payload, uint8_t len){
     connect_msg_t* msg = (connect_msg_t*) payload;
-
+    int i = 0 ;
     uint16_t sourceAddr = msg->address;
 
-    printf("broker: Received CONNECT - from: %d\n", sourceAddr);
-    printfflush();
+    //printf("broker: Received CONNECT - from: %d\n", sourceAddr);
+    //printfflush();
 
-    //sendACK(msg->id, sourceAddr);
+    for (i = 0; i<nClients;i++)
+    {
+      if (clients[i] == sourceAddr)
+        //printf("ALREADY CONNECTED");
+        //printfflush();
+        return packet;
+    }
+    clients[nClients++] = sourceAddr;
+    sendACK(msg->id, sourceAddr);
 
     // trovare modo di "salvare" una publish e rimandarla eventualmente se non si riceve la puback
 
@@ -121,8 +132,8 @@ implementation{
     publish_msg_t* msg = (publish_msg_t*) payload;
 
     uint16_t sourceAddr = msg->address;
-    printf("broker: Received PUB - id: %d _ from: %d\n", msg->id, sourceAddr);
-    printfflush();
+    //printf("broker: Received PUB - id: %d _ from: %d\n", msg->id, sourceAddr);
+    //printfflush();
 
     /*if(msg->qos)
     sendACK(msg->id, sourceAddr, PUBACK);*/
@@ -151,8 +162,8 @@ implementation{
   event void SplitControl.startDone(error_t err)
   {
     if (err == SUCCESS) {
-      printf("broker: Radio on!\n");
-      printfflush();
+      //printf("broker: Radio on!\n");
+      //printfflush();
     }
     else {
       call SplitControl.start();
@@ -163,9 +174,9 @@ implementation{
   {
     publish_msg_t* publishMsg = (publish_msg_t*) msg;
 
-    if(publishMsg->qos && !(call PacketAcknowledgements.wasAcked(msg))){
-      call SendPub.send((call AMPacket.destination(msg)), msg, sizeof(publish_msg_t));
-    }
+    // if(publishMsg->qos && !(call PacketAcknowledgements.wasAcked(msg))){
+    //   call SendPub.send((call AMPacket.destination(msg)), msg, sizeof(publish_msg_t));
+    // }
   }
 
   event void SendConnectAck.sendDone(message_t* msg, error_t err) {}

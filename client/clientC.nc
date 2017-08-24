@@ -1,5 +1,5 @@
 #include "messages.h"
-#include "printf.h"
+//#include "printf.h"
 #include "Timer.h"
 
 module clientC {
@@ -42,10 +42,10 @@ implementation {
     msg->id = counter++;
     msg->address = TOS_NODE_ID;
     msg->connect_msg_type = CONNECT;
-    call PacketAcknowledgements.requestAck(&packet);
+    //call PacketAcknowledgements.requestAck(&packet);
     if(call SendConnectMsg.send(AM_BROADCAST_ADDR, &packet, sizeof(connect_msg_t)) == SUCCESS){
-      printf("client_%d: Send CONNECT\n", TOS_NODE_ID);
-      printfflush();
+      //printf("client_%d: Send CONNECT\n", TOS_NODE_ID);
+      //printfflush();
     }
   }
 
@@ -85,10 +85,10 @@ implementation {
     }
     msg->numOfSubs = subCounter;
     
-    call PacketAcknowledgements.requestAck(&packet);
+    //call PacketAcknowledgements.requestAck(&packet);
     if(call SendConnectMsg.send(brokerAddress, &packet, sizeof(subscribe_msg_t)) == SUCCESS){
-      printf("client_%d: Send SUBSCRIBE - msg_id: %d\n", TOS_NODE_ID, msg->id);
-      printfflush();
+      //printf("client_%d: Send SUBSCRIBE - msg_id: %d\n", TOS_NODE_ID, msg->id);
+      //printfflush();
     }
   }
 
@@ -96,8 +96,8 @@ implementation {
   event void SplitControl.startDone(error_t err)
   {
     if (err == SUCCESS) {
-      printf("client_%d: Radio on!\n", TOS_NODE_ID);
-      printfflush();
+      //printf("client_%d: Radio on!\n", TOS_NODE_ID);
+      //printfflush();
 
       sendConnect();
     }
@@ -113,71 +113,71 @@ implementation {
 
 
     uint16_t sourceAddr = msg->address;
-    printf("client_%d: Received forwarded PUB from: %d\n", TOS_NODE_ID, sourceAddr);
-    printf("client_%d: -- id %d", TOS_NODE_ID, msg->id);
-    printf("client_%d: -- topic %d", TOS_NODE_ID, msg->topic);
-    printf("client_%d: -- payload %d", TOS_NODE_ID, msg->payload);
+    //printf("client_%d: Received forwarded PUB from: %d\n", TOS_NODE_ID, sourceAddr);
+    //printf("client_%d: -- id %d", TOS_NODE_ID, msg->id);
+    //printf("client_%d: -- topic %d", TOS_NODE_ID, msg->topic);
+    //printf("client_%d: -- payload %d", TOS_NODE_ID, msg->payload);
 
-    printfflush();
+    //printfflush();
     return packet;
   }
 
   event message_t* ReceiveConnAck.receive(message_t* packet, void* payload, uint8_t len){
-    /*connect_msg_t* msg = (connect_msg_t*) payload;
+    connect_msg_t* msg = (connect_msg_t*) payload;
     
     if (msg->connect_msg_type == CONNACK) {
       brokerAddress = msg->address;
-      printf("client_%d: Received CONNACK\n", TOS_NODE_ID);
-      printfflush();
+      //printf("client_%d: Received CONNACK\n", TOS_NODE_ID);
+      //printfflush();
 
       post sendSubscribe();
 
       call TimerPub.startPeriodic(3000); //start sendig PUBLISH
-    }*/
+    }
     return packet;
   }
 
   event void SendConnectMsg.sendDone(message_t* msg, error_t err)
   {
-    if(!(call PacketAcknowledgements.wasAcked(msg))){
-      call SendConnectMsg.send(AM_BROADCAST_ADDR, msg, sizeof(connect_msg_t));
-      printf("client_%d: Resend CONNECT\n", TOS_NODE_ID);
-      printfflush();
-    }
-    else {
-      printf("client_%d: Received CONNACK\n", TOS_NODE_ID);
-      printfflush();
+    //if(!(call PacketAcknowledgements.wasAcked(msg))){
+    //  call SendConnectMsg.send(AM_BROADCAST_ADDR, msg, sizeof(connect_msg_t));
+      //printf("client_%d: Resend CONNECT\n", TOS_NODE_ID);
+      //printfflush();
+    //}
+    // else {
+    //   //printf("client_%d: Received CONNACK\n", TOS_NODE_ID);
+    //   //printfflush();
 
-      post sendSubscribe();
+    //   post sendSubscribe();
 
-      call TimerPub.startPeriodic(3000); //start sendig PUBLISH
-    }
+    //   call TimerPub.startPeriodic(3000); //start sendig PUBLISH
+    // }
   }
 
   event void SendSub.sendDone(message_t* msg, error_t err)
   {
-    if(!(call PacketAcknowledgements.wasAcked(msg))){
-      call SendSub.send(brokerAddress, msg, sizeof(subscribe_msg_t));
-      printf("client_%d: Resend SUBSCRIBE\n", TOS_NODE_ID);
-      printfflush();
-    } else {
-      printf("client_%d: SUBACK received\n", TOS_NODE_ID);
-      printfflush();
-    }
+    //if(!(call PacketAcknowledgements.wasAcked(msg))){
+    //  call SendSub.send(brokerAddress, msg, sizeof(subscribe_msg_t));
+      //printf("client_%d: Resend SUBSCRIBE\n", TOS_NODE_ID);
+      //printfflush();
+    //} else {
+      //printf("client_%d: SUBACK received\n", TOS_NODE_ID);
+      //printfflush();
+    //}
   }
 
   event void SendPub.sendDone(message_t* msg, error_t err)
   {
     publish_msg_t* publishMsg = (publish_msg_t*) msg;
 
-    if(publishMsg->qos && !(call PacketAcknowledgements.wasAcked(msg))){
-      call SendPub.send(brokerAddress, msg, sizeof(publish_msg_t));
-      printf("client_%d: Resend PUBLISH\n", TOS_NODE_ID);
-      printfflush();
-    } else if(publishMsg->qos){
-      printf("client_%d: PUBACK of msg %d received\n", TOS_NODE_ID, publishMsg->id);
-      printfflush();
-    }
+    //if(publishMsg->qos && !(call PacketAcknowledgements.wasAcked(msg))){
+    //  call SendPub.send(brokerAddress, msg, sizeof(publish_msg_t));
+      //printf("client_%d: Resend PUBLISH\n", TOS_NODE_ID);
+      //printfflush();
+    //} else if(publishMsg->qos){
+      //printf("client_%d: PUBACK of msg %d received\n", TOS_NODE_ID, publishMsg->id);
+      //printfflush();
+    //}
   }
 
   event void TimerPub.fired() {
@@ -203,17 +203,17 @@ implementation {
       msg->qos = 0;  
     } else {
       msg->qos = 1;
-      call PacketAcknowledgements.requestAck(&packet);
+      //call PacketAcknowledgements.requestAck(&packet);
     } 
 
     msg->payload = call Read.rand16();
 
     if(call SendPub.send(brokerAddress, &packet, sizeof(publish_msg_t)) == SUCCESS){
-      printf("client_%d: Send PUBLISH - msg_id: %d\n", TOS_NODE_ID, msg->id);
-      printf("client_%d: -- topic %d", TOS_NODE_ID, msg->topic);
-      printf("client_%d: -- payload %d", TOS_NODE_ID, msg->payload);
-      printf("client_%d: -- qos %d", TOS_NODE_ID, msg->qos);
-      printfflush();
+      //printf("client_%d: Send PUBLISH - msg_id: %d\n", TOS_NODE_ID, msg->id);
+      //printf("client_%d: -- topic %d", TOS_NODE_ID, msg->topic);
+      //printf("client_%d: -- payload %d", TOS_NODE_ID, msg->payload);
+      //printf("client_%d: -- qos %d", TOS_NODE_ID, msg->qos);
+      //printfflush();
     }
   }
 }

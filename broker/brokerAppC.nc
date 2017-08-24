@@ -7,8 +7,8 @@ implementation {
     components MainC;
     components brokerC;
     components ActiveMessageC;
-    components PrintfC;
-    components SerialStartC;
+    //components PrintfC;
+    //components SerialStartC;
 
     components new AMSenderC(AM_CONNECT_MSG) as SendConnectAck;
     components new AMReceiverC(AM_CONNECT_MSG) as RecConnectMsg;
