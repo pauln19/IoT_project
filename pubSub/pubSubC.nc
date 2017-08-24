@@ -16,8 +16,8 @@ module pubSubC {
     interface AMSend as SendSub;
     interface Receive as ReceiveSub;
     
-    interface AMPacket
-    interface Packet
+    interface AMPacket;
+    interface Packet;
     
     interface Timer<TMilli> as TimerPub;
     interface Timer<TMilli> as TimerAckConnect;

@@ -5,6 +5,7 @@ configuration pubSubAppC {}
 implementation {
 
     components MainC;
+    components RandomC;
     components pubSubC as App;
     components ActiveMessageC;
 
