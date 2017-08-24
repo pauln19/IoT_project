@@ -21,8 +21,9 @@ implementation {
     components new TimerMilliC() as TimerPub;
     components new TimerMilliC() as TimerAckConnect;
     components new TimerMilliC() as TimerAckSub;
-    components new TimerMilliC() as TimerAckPub;
 
+    components new VirtualizeTimerC(TMilli,uniqueCount(255)) as VirtTimersMilli;
+    
     App.Boot -> MainC.Boot;
     App.SplitControl -> ActiveMessageC;
 
@@ -44,5 +45,5 @@ implementation {
     App.TimerPub -> TimerPub;
     App.TimerAckConnect -> TimerAckConnect;
     App.TimerAckSub -> TimerAckSub;
-    App.TimerAckPub -> TimerAckPub;
+    App.TimerAckPub = VirtTimersMilli.Timer;
 }

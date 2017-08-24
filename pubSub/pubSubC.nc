@@ -22,7 +22,7 @@ module pubSubC {
     interface Timer<TMilli> as TimerPub;
     interface Timer<TMilli> as TimerAckConnect;
     interface Timer<TMilli> as TimerAckSub;
-    interface Timer<TMilli> as TimerAckPub;
+    interface Timer<TMilli> as TimerAckPub[uint8_t num];
 
   }
 }
@@ -41,7 +41,7 @@ implementation {
 
     uint16_t clients[256];
     uint8_t nClients = 0;
-    message_t* toResendMsg;
+    message_t* toResendMsg[256];
 
     /*
      * Function used by both broker and clients for sending ACKS or CONNECT messages    
@@ -72,7 +72,7 @@ implementation {
         
         subscribe_msg_t* msg = (subscribe_msg_t*) (call Packet.getPayload(&packet, sizeof(subscribe_msg_t)));
         
-        atomic { msg->id = counter++;}
+        atomic { msg->id = counter++; }
         
         msg->address = TOS_NODE_ID;
         
@@ -108,9 +108,13 @@ implementation {
             dbg("client","%d - Send SUBSCRIBE - msg_id: %d\n", TOS_NODE_ID, msg->id);
 
         call TimerAckSub.startOneShot(ACKTIMEOUT);
-        toResendMsg = &packet;
+        toResendMsg[0] = &packet;
     }
 
+    /*********************BROKER**********************/
+    /*
+     * Forward the message msg to all the clients in the array subscribers, with their qos  
+     */
     void forwardPublish(my_sub_t subscribers[256], uint8_t numOfSubs, message_t* msg){
         uint8_t i;
         publish_msg_t* publishMsg = (publish_msg_t*) msg;
@@ -122,13 +126,11 @@ implementation {
             if(call SendPub.send(subscribers[i].address_id, msg, sizeof(publish_msg_t)) == SUCCESS)
                 dbg("broker", "forwardPublish %d to %d\n", publishMsg->id, subscribers[i].address_id);
 
-            if(publishMsg->qos)
-                //start a timer
-
-            //TODO manage single retransmitions
-            // if not this TinyOS shit: insert in a queue. 
-            //                          invoke a task that send the first and wait for its PUBACK (if needed)
-            //                          if qos = 0 pass to next msg
+            if(publishMsg->qos == 1)
+            {
+                toResendMsg[subscribers[i].address_id] = msg;
+                call TimerAckPub[subscribers[i].address_id].startOneShot(ACKTIMEOUT);
+            }
         }
     }
 
@@ -159,7 +161,7 @@ implementation {
             if (TOS_NODE_ID != BROKER) {
                 /*********************CLIENTS**********************/
                 // Send connect message to Broker
-                toResendMsg = sendGenericSimple(AM_BROADCAST_ADDR, counter++, CONNECT);
+                toResendMsg[0] = sendGenericSimple(AM_BROADCAST_ADDR, counter++, CONNECT);
                 // wait for CONNACK
                 call TimerAckConnect.startOneShot(ACKTIMEOUT);
             }
@@ -177,13 +179,12 @@ implementation {
         if (call AMPacket.isForMe(packet))
         {
             simple_msg_t* msg = (simple_msg_t*) payload;
-
+            uint16_t sourceAddr = msg->address;
             if (TOS_NODE_ID == BROKER) {
                 /*********************BROKER**********************/
                 if(msg->simple_msg_type == CONNECT) {
                     /*********************CONNECT**********************/
                     int i = 0 ;
-                    uint16_t sourceAddr = msg->address;
 
                     dbg("broker", "Received CONNECT - from: %d\n", sourceAddr);
                     //Check if the client has already been registered
@@ -199,11 +200,8 @@ implementation {
 
                     return packet;
                 } else if(msg->simple_msg_type == PUBACK) {
-                    /*********************PUBACK**********************/
-                    // TODO
-                    // delete relative message kept in memory, stop its ACKTimer
-                    // pass to next msg
-
+                    call TimerAckPub[sourceAddr].stop();
+                    dbg("broker", "Received PUBACK - from: %d\n", sourceAddr);
                 }
             } else { 
                 /*********************CLIENTS**********************/
@@ -211,6 +209,9 @@ implementation {
                     /*********************CONNACK**********************/
                     call TimerAckConnect.stop(); // Stops the timer for resending CONNECT
                     dbg("client", "%d - Received CONNACK", TOS_NODE_ID);
+
+                    //save the broker address
+                    brokerAddress = msg->address;
 
                     post sendSubscribe();   // send the subscribe message
                     return packet;
@@ -223,7 +224,7 @@ implementation {
                     return packet;
                 } else if(msg->simple_msg_type == PUBACK) {
                     /*********************PUBACK**********************/
-                    call TimerAckPub.stop(); // Stops the timer for resending PUBLISH
+                    call TimerAckPub[0].stop(); // Stops the timer for resending PUBLISH
                     dbg("client", "%d - Received PUBACK", TOS_NODE_ID);
 
                     call TimerPub.startOneShot(3000);   // start sending PUBLISH
@@ -248,16 +249,17 @@ implementation {
 
                 if(msg->qos == 1)
                     sendGenericSimple(sourceAddr, msg->id, PUBACK);
+                atomic {
+                    switch (msg->topic){
+                        case (TEMPERATURE):
+                            forwardPublish(tempSub, numTempSub, packet);
 
-                switch (msg->topic){
-                    case (TEMPERATURE):
-                        forwardPublish(tempSub, numTempSub, packet);
+                        case (HUMIDITY):
+                            forwardPublish(humSub, numHumSub, packet);
 
-                    case (HUMIDITY):
-                        forwardPublish(humSub, numHumSub, packet);
-
-                    case (LUMINOSITY):
-                        forwardPublish(lumSub, numLumSub, packet);
+                        case (LUMINOSITY):
+                            forwardPublish(lumSub, numLumSub, packet);
+                    }
                 }
 
                 return packet;
@@ -274,6 +276,7 @@ implementation {
 
             }
         }
+        return packet;
     }
 
     /*********************BROKER**********************/
@@ -355,17 +358,21 @@ implementation {
         } 
 
         msg->payload = call Read.rand16();
+        
 
         if(call SendPub.send(brokerAddress, &packet, sizeof(publish_msg_t)) == SUCCESS){
             dbg("client", "%d - Send PUBLISH - msg_id: %d\n", TOS_NODE_ID, msg->id);
             dbg("client", "%d - -- topic %d", TOS_NODE_ID, msg->topic);
             dbg("client", "%d - -- payload %d", TOS_NODE_ID, msg->payload);
             dbg("client", "%d - -- qos %d", TOS_NODE_ID, msg->qos);
-            if (msg->qos == 1)
-                call TimerAckPub.startOneShot(ACKTIMEOUT);
+            
         }
-
-        toResendMsg = &packet;
+        
+        if (msg->qos == 1)
+            call TimerAckPub[0].startOneShot(ACKTIMEOUT);
+            toResendMsg[0] = &packet;
+        else
+            call TimerPub.startOneShot(3000);
     }
 
     /*********************CLIENTS**********************/
@@ -374,7 +381,7 @@ implementation {
      */
     event void TimerAckConnect.fired() {
         // CONNACK not received in Timeout, Resend CONNECT
-        if(call SendSimple.send(AM_BROADCAST_ADDR, toResendMsg, sizeof(simple_msg_t)) == SUCCESS){
+        if(call SendSimple.send(AM_BROADCAST_ADDR, toResendMsg[0], sizeof(simple_msg_t)) == SUCCESS){
             dbg("client", "%d - Resend CONNECT message", TOS_NODE_ID);
         }
         // wait for CONNACK
@@ -387,7 +394,7 @@ implementation {
      */
     event void TimerAckSub.fired() {
         // SUBACK not received, resending SUBSCRIBE
-        if(call SendSub.send(brokerAddress, toResendMsg, sizeof(subscribe_msg_t)) == SUCCESS){
+        if(call SendSub.send(brokerAddress, toResendMsg[0], sizeof(subscribe_msg_t)) == SUCCESS){
             dbg("client", "%d - Resend SUBSCRIBE message", TOS_NODE_ID);
         }
         // wait for SUBACK
@@ -397,17 +404,17 @@ implementation {
     /*
      * Timer used to resend PUBLISH if the SUBACK is not received  
      */
-    event void TimerAckPub.fired() {
-        if (TOS_NODE_ID == BROKER) {
+    event void TimerAckPub.fired[int num]() {
+        // PUBACK not received, resending PUBLISH
+        // in case of client num will always be 0
 
-        } else {
-            /*********************CLIENTS**********************/
-            // PUBACL not received, resending PUBLISH
-            if(call SendPub.send(brokerAddress, toResendMsg, sizeof(publish_msg_t)) == SUCCESS){
-                dbg("client", "%d - Resend PUBLISH message", TOS_NODE_ID);
-            }
-            // wait for SUBACK
-            call TimerAckPub.startOneShot(ACKTIMEOUT);
-            }
-    }
+        am_addr_t dest = call AMPacket.destination(toResendMsg[num]);
+
+        if(call SendPub.send(dest, toResendMsg[num], sizeof(publish_msg_t)) == SUCCESS){
+            dbg("ResendPub", "%d - Resend PUBLISH message", TOS_NODE_ID);
+        }
+        // wait for PUBACK
+        call TimerAckPub[num].startOneShot(ACKTIMEOUT);
+        }
+    
 }
