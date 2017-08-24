@@ -4,11 +4,6 @@ from TOSSIM import *
 
 t = Tossim([])
 
-sf = SerialForwarder(9001)
-throttle = Throttle(t, 10)
-sf_process = True
-sf_throttle = True
-
 topofile = "topology.txt"
 modelfile = "meyer-heavy.txt"
 
@@ -77,18 +72,7 @@ for i in range(1, 3):
 
 print "Start simulation with TOSSIM! \n\n\n"
 
-if ( sf_process == True ):
-    sf.process()
-if ( sf_throttle == True ):
-    throttle.initialize()
-
-for i in range(0,2000):
+for i in range(0,500):
     t.runNextEvent()
-    if ( sf_throttle == True ):
-        throttle.checkThrottle()
-    if ( sf_process == True ):
-        sf.process()
-
+    
 print "\n\n\nSimulation finished!"
-
-throttle.printStatistics()

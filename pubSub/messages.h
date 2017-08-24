@@ -40,8 +40,8 @@ typedef nx_struct publish_msg {
 
 enum {
     AM_CONNECT_MSG = 6,
-    AM_SUBSCRIBE_MSG = 10,
-    AM_PUBLISH_MSG = 14
+    AM_SUBSCRIBE_MSG = 7,
+    AM_PUBLISH_MSG = 8
 };
 
 #endif
