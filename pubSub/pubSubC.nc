@@ -71,7 +71,9 @@ implementation {
         int tmpId = TOS_NODE_ID;
         
         subscribe_msg_t* msg = (subscribe_msg_t*) (call Packet.getPayload(&packet, sizeof(subscribe_msg_t)));
-        msg->id = counter++;
+        
+        atomic { msg->id = counter++;}
+        
         msg->address = TOS_NODE_ID;
         
         // Pseudo random choice of subscription and qos
@@ -130,6 +132,20 @@ implementation {
         }
     }
 
+    /*********************BROKER**********************/
+    /*
+     * return True if the address is registered, False otherwise   
+     */
+    bool checkRegistered(uint16_t address) {
+        for (i = 0; i < nClients; i++)
+        {
+            if (clients[i] == sourceAddr){
+                return true;
+            }
+        }
+        return false;
+    }
+
     event void Boot.booted()
     {
         call SplitControl.start();
@@ -171,15 +187,14 @@ implementation {
 
                     dbg("broker", "Received CONNECT - from: %d\n", sourceAddr);
                     //Check if the client has already been registered
-                    for (i = 0; i<nClients;i++)
-                    {
-                        if (clients[i] == sourceAddr){
-                            dbg("broker", "%d already connected\n", sourceAddr);
-                            return packet;
-                        }
+                    atomic {
+                        if (checkRegistered(sourceAddr)){
+                                dbg("broker", "%d already connected\n", sourceAddr);
+                                return packet;
+                            }
+                        //if not already registered register and send CONNACK
+                        clients[nClients++] = sourceAddr;
                     }
-                    //if not already registered register and send CONNACK
-                    clients[nClients++] = sourceAddr;
                     sendGenericSimple(sourceAddr, msg->id, CONNACK);
 
                     return packet;
@@ -229,7 +244,7 @@ implementation {
             uint16_t sourceAddr = msg->address;
             if (TOS_NODE_ID == BROKER) {
                 /*********************BROKER**********************/
-                printf("broker", "Received PUB - id: %d _ from: %d\n", msg->id, sourceAddr);
+                dbg("broker", "Received PUB - id: %d _ from: %d\n", msg->id, sourceAddr);
 
                 if(msg->qos == 1)
                     sendGenericSimple(sourceAddr, msg->id, PUBACK);
@@ -285,15 +300,17 @@ implementation {
 
                     dbg("broker: Saving SUB of %d to topic %d", sourceAddr, incomingSub.topic);
 
-                    switch (incomingSub.topic){
-                        case (TEMPERATURE):
-                           tempSub[numTempSub++] = sub;
+                    atomic {
+                        switch (incomingSub.topic){
+                            case (TEMPERATURE):
+                               tempSub[numTempSub++] = sub;
 
-                        case (HUMIDITY):
-                           humSub[numHumSub++] = sub;
+                            case (HUMIDITY):
+                               humSub[numHumSub++] = sub;
 
-                        case (LUMINOSITY):
-                           lumSub[numLumSub++] = sub;
+                            case (LUMINOSITY):
+                               lumSub[numLumSub++] = sub;
+                        }
                     }
                 }
                 return packet;
@@ -316,7 +333,7 @@ implementation {
         message_t packet;
 
         publish_msg_t* msg = (publish_msg_t*) (call Packet.getPayload(&packet, sizeof(publish_msg_t)));
-        msg->id = counter++;
+        atomic { msg->id = counter++; }
         msg->address = TOS_NODE_ID;
 
         //statically choose the topic for publish
