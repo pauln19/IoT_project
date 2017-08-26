@@ -7,9 +7,8 @@ t = Tossim([])
 topofile = "topology.txt"
 modelfile = "meyer-heavy.txt"
 
-mac = t.mac()
 radio = t.radio()
-t.init()
+
 #simulation_outfile = "simulation.txt"
 #simulation_out = open(simulation_outfile, "w")
 #out = open(simulation_outfile, "w")
@@ -31,6 +30,12 @@ print "Creating node 2..."
 node2 = t.getNode(2)
 time2 = 1 * t.ticksPerSecond()
 node2.bootAtTime(time2)
+print ">>>Will boot at time", time2 / t.ticksPerSecond(), "[sec]"
+
+print "Creating node 3..."
+node3 = t.getNode(3)
+time3 = 2 * t.ticksPerSecond()
+node3.bootAtTime(time2)
 print ">>>Will boot at time", time2 / t.ticksPerSecond(), "[sec]"
 
 print "Creating radio channels..."
@@ -60,11 +65,11 @@ for line in lines:
             mid_compl = 0;
             sys.stdout.write ("#")
             sys.stdout.flush()
-        for i in range(1, 3):
+        for i in range(1, 4):
             t.getNode(i).addNoiseTraceReading(val)
 print "Done!";
 
-for i in range(1, 3):
+for i in range(1, 4):
     print ">>>Creating noise model for node:", i;
     t.getNode(i).createNoiseModel()
 
@@ -72,7 +77,7 @@ for i in range(1, 3):
 
 print "Start simulation with TOSSIM! \n\n\n"
 
-for i in range(0,500):
+for i in range(0,5000):
     t.runNextEvent()
     
 print "\n\n\nSimulation finished!"

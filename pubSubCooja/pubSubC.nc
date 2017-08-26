@@ -1,4 +1,5 @@
 #include "messages.h"
+#include "printf.h"
 
 module pubSubC {
   uses{
@@ -18,11 +19,12 @@ module pubSubC {
     
     interface AMPacket;
     interface Packet;
+    interface PacketAcknowledgements;
     
     interface Timer<TMilli> as TimerPub;
     interface Timer<TMilli> as TimerAckConnect;
-    interface Timer<TMilli> as TimerAckSub;
-    interface Timer<TMilli> as TimerAckPub;
+    interface Timer<TMilli> as TimerSub;
+    //interface Timer<TMilli> as TimerAckPub;
 
   }
 }
@@ -59,8 +61,8 @@ implementation {
         msg->simple_msg_type = type;
         if(call SendSimple.send(destAddress, &packet, sizeof(simple_msg_t)) == SUCCESS){
             //atomic {
-            dbg("SimpleMessage", "%d - Send %d message to %d\n", TOS_NODE_ID, type, destAddress);
-            //dbgflush();}
+            //printf("SimpleMessage -- %d - Send %d message to %d\n", TOS_NODE_ID, type, destAddress);
+            //printfflush();}
         }
         return packet;
     }
@@ -78,7 +80,7 @@ implementation {
         subscribe_msg_t* msg = (subscribe_msg_t*) (call Packet.getPayload(&packet, sizeof(subscribe_msg_t)));
         
         // Pseudo random choice of subscription and qos
-        while(tmpId >= 2 && subCounter < 3) {
+        while(tmpId >= 1 && subCounter < 3) {
             sub_item_t item;
 
             switch ((int) (tmpId%3)) {
@@ -94,32 +96,33 @@ implementation {
             }
         
             if ((call Read.rand16()) % 2 == 0)
-            {
-                item.qos = 0;  
-            } else {
+                item.qos = 0;
+            else
                 item.qos = 1;
-            } 
             
             msg->subscriptions[subCounter] = item;
             subCounter ++;
-            tmpId -= 5;
+            tmpId -= 4;
 
-            dbg("client", "%d --- Subscribe topic %d with QoS %d\n", TOS_NODE_ID, item.topic, item.qos);
-            
+            /*atomic
+            {printf("client -- %d --- Subscribe topic %d with QoS %d\n", TOS_NODE_ID, item.topic, item.qos);
+            printfflush();}*/
             
         }
         msg->id = counter++;
         msg->address = TOS_NODE_ID;
         msg->numOfSubs = subCounter;
+        call PacketAcknowledgements.requestAck(&packet);
+                
+        if (call SendSub.send(brokerAddress, &packet, sizeof(subscribe_msg_t)) == SUCCESS) {
+            //printf("client -- %d - Send SUBSCRIBE - msg_id: %d\n", TOS_NODE_ID, msg->id);
+            //printfflush();
+        }
         
-        if(call SendSimple.send(brokerAddress, &packet, sizeof(subscribe_msg_t)) == SUCCESS)
-            {
-                dbg("client", "%d - Send SUBSCRIBE - msg_id: %d\n", TOS_NODE_ID, msg->id);
-                //dbgflush();
-            }
+        return;
 
-        call TimerAckSub.startOneShot(ACKTIMEOUT);
-        toResendMsg = packet;
+        //call TimerAckSub.startOneShot(ACKTIMEOUT);
+        //toResendMsg = packet;
     }
 
     /*********************BROKER**********************/
@@ -131,12 +134,18 @@ implementation {
         
         for(i=0; i<numOfSubs; i++){
 
-            msg->qos = subscribers[i].qos;
-
+            if (subscribers[i].qos == 1){
+                msg->qos = 1;
+                call PacketAcknowledgements.requestAck(packet);
+            } else { 
+                msg->qos = 0;
+                call PacketAcknowledgements.noAck(packet);
+            }
             if(call SendPub.send(subscribers[i].address_id, packet, sizeof(publish_msg_t)) == SUCCESS) {
-                
-                dbg("broker", "forwardPublish %u to %u\n", msg->id, subscribers[i].address_id);
-                }
+                //atomic{
+                //printf("broker -- forwardPublish %u to %u\n", msg->id, subscribers[i].address_id);
+                //printfflush();}
+            }
             //if(publishMsg->qos == 1)
             //{
             //   toResendMsg = msg;
@@ -149,7 +158,7 @@ implementation {
     /*
      * return True if the address is registered, False otherwise   
      */
-    int checkClients(uint16_t address, uint16_t clients[NUMCLIENTS], uint8_t nClients) {
+    bool checkClients(uint16_t address, uint16_t clients[NUMCLIENTS], uint8_t nClients) {
         int i;
         for (i = 0; i < nClients; i++)
         {
@@ -168,8 +177,8 @@ implementation {
     event void SplitControl.startDone(error_t err)
     {
         if (err == SUCCESS) {
-            dbg("radio", "%d - Radio on!\n", TOS_NODE_ID);
-            //dbgflush();
+            //printf("radio -- %d - Radio on!\n", TOS_NODE_ID);
+            //printfflush();
             if (TOS_NODE_ID != BROKER) {
                 /*********************CLIENTS**********************/
                 // Send connect message to Broker
@@ -200,64 +209,64 @@ implementation {
                 /*********************BROKER**********************/
                 if(msg->simple_msg_type == CONNECT) {
                     /*********************CONNECT**********************/
-                    //dbg("broker", "Received CONNECT - from: %d\n", sourceAddr);
-                    //dbgflush();
+                    //printf("broker -- Received CONNECT - from: %d\n", sourceAddr);
+                    //printfflush();
                     //Check if the client has already been registered
-                    //atomic {
+                    atomic {
                         if (checkClients(sourceAddr, connClients, nConnClients)){
-                                dbg("broker", "%d already connected\n", sourceAddr);
-                                //dbgflush();
+                                //printf("broker -- %d already connected\n", sourceAddr);
+                                //printfflush();
                                 return packet;
                             }
                         //if not already registered register and send CONNACK
                         connClients[nConnClients++] = sourceAddr;
-                    //}
+                    }
                     sendGenericSimple(sourceAddr, msg->id, CONNACK);
 
 
                     return packet;
-                } else if(msg->simple_msg_type == PUBACK) {
-                    call TimerAckPub.stop();
-                    dbg("broker", "Received PUBACK - from: %d\n", sourceAddr);
-                    //dbgflush();
+                // } else if(msg->simple_msg_type == PUBACK) {
+                //     call TimerAckPub.stop();
+                //     //printf("broker -- Received PUBACK - from: %d\n", sourceAddr);
+                //     //printfflush();
                 }
             } else { 
                 /*********************CLIENTS**********************/
                 if(msg->simple_msg_type == CONNACK) {
                     /*********************CONNACK**********************/
                     call TimerAckConnect.stop(); // Stops the timer for resending CONNECT
-                    
-                    dbg("client", "%d - Received CONNACK\n", TOS_NODE_ID);
-                    
+                    /*atomic{
+                    printf("client -- %d - Received CONNACK\n", TOS_NODE_ID);
+                    printfflush();}*/
 
                     //save the broker address
                     brokerAddress = msg->address;
 
-                    post sendSubscribe();   // send the subscribe message
+                    call TimerSub.startOneShot(500);   // send the subscribe message
                     return packet;
-                } else if(msg->simple_msg_type == SUBACK) {
-                    /*********************SUBACK**********************/
-                    call TimerAckSub.stop(); // Stops the timer for resending SUBSCRIBE
-                    
-                    dbg("client", "%d - Received SUBACK\n", TOS_NODE_ID);
-                    
+                // } else if(msg->simple_msg_type == SUBACK) {
+                //     /*********************SUBACK**********************/
+                //     call TimerAckSub.stop(); // Stops the timer for resending SUBSCRIBE
+                //     /*atomic{
+                //     printf("client -- %d - Received SUBACK\n", TOS_NODE_ID);
+                //     printfflush();}*/
 
-                    call TimerPub.startPeriodic(6000);   // start sending PUBLISH
-                    return packet;
-                } else if(msg->simple_msg_type == PUBACK) {
-                    /*********************PUBACK**********************/
-                    call TimerAckPub.stop(); // Stops the timer for resending PUBLISH
-                    
-                    dbg("client", "%d - Received PUBACK\n", TOS_NODE_ID);
-                    
+                //     call TimerPub.startPeriodic(6000);   // start sending PUBLISH
+                //     return packet;
+                // } else if(msg->simple_msg_type == PUBACK) {
+                //     /*********************PUBACK**********************/
+                //     call TimerAckPub.stop(); // Stops the timer for resending PUBLISH
+                //     /*atomic {
+                //     printf("client -- %d - Received PUBACK\n", TOS_NODE_ID);
+                //     printfflush();}*/
 
-                    return packet;
+                //     return packet;
                 }
             }
 
         }
-        dbg("broker", "ERROR\n");
-        //dbgflush();
+        //printf("broker -- ERROR\n");
+        //printfflush();
         return packet;
     }
 
@@ -265,22 +274,23 @@ implementation {
      * The ReceivePub interface will receive PUBLISH messages, by both broker (to forward) and clients  
      */
     event message_t* ReceivePub.receive(message_t* packet, void* payload, uint8_t len) {
+        publish_msg_t* msg = (publish_msg_t*) payload;
+        uint16_t sourceAddr = msg->address;
+        printf("%d -- Received PUB - id: %d _ from: %d -- topic %d\n", TOS_NODE_ID, msg->id, sourceAddr, msg->topic);
+        printfflush();
         if (call AMPacket.isForMe(packet))
         {
-            publish_msg_t* msg = (publish_msg_t*) payload;
-            uint16_t sourceAddr = msg->address;
+            
             if (TOS_NODE_ID == BROKER) {
                 /*********************BROKER**********************/
-                int qos= msg->qos;
-                dbg("broker", "Received PUB - id: %d _ from: %d\n", msg->id, sourceAddr);
-                //dbgflush();
                 
+                //bool qos= (bool)(msg->qos);
                 /*printf(" --------------- %d\n", qos);
                 printfflush();*/
 
-                if(qos == 1)
-                    sendGenericSimple(sourceAddr, msg->id, PUBACK);
-                //atomic {
+                // if(qos)
+                //     sendGenericSimple(sourceAddr, msg->id, PUBACK);
+                
                 switch (msg->topic){
                     case (TEMPERATURE):
                         forwardPublish(tempSub, numTempSub, packet, msg);
@@ -292,21 +302,21 @@ implementation {
                         forwardPublish(lumSub, numLumSub, packet, msg);
                         break;
                 }
-                //}
+                
 
                 return packet;
 
             } else {
                 /*********************CLIENTS**********************/
-                int qos = msg->qos;
-                if (qos == 1)
-                    sendGenericSimple(brokerAddress, msg->id, PUBACK);
+                //bool qos = msg->qos;
+                //if (qos)
+                //    sendGenericSimple(brokerAddress, msg->id, PUBACK);
                 //atomic{
-                dbg("client", "%d - Received forwarded PUB from: %d\n      ", " id %d", "topic %d --qos %d\n", TOS_NODE_ID, sourceAddr, msg->id, msg->topic, qos);
-                //dbg("client", "%d -  %d\n", TOS_NODE_ID, );
-                //dbg("client", "%d -", "id %d", "topic %d \n", TOS_NODE_ID, msg->id, msg->topic);
-                //dbg("client", "%d -", "payload %d\n", TOS_NODE_ID, msg->payload);
-                //dbgflush();}
+                printf("client -- %d - Received forwarded PUB from: %d\n       --  id %d -- topic %d \n", TOS_NODE_ID, sourceAddr, msg->id, msg->topic);
+                //printf("client -- %d -  %d\n", TOS_NODE_ID, );
+                //printf("client -- %d - -- id %d -- topic %d \n", TOS_NODE_ID, msg->id, msg->topic);
+                //printf("client -- %d - -- payload %d\n", TOS_NODE_ID, msg->payload);
+                printfflush();
 
             }
         }
@@ -326,50 +336,94 @@ implementation {
 
                 uint16_t sourceAddr = msg->address;
                 //atomic {
-                dbg("broker", "Received SUBSCRIBE - id: %d _ from: %d\n", msg->id, sourceAddr);
-                //dbgflush();}
-                sendGenericSimple(sourceAddr, msg->id, SUBACK); // sending SUBACK
+                //printf("broker -- Received SUBSCRIBE - id: %d _ from: %d\n", msg->id, sourceAddr);
+                //printfflush();}
+                //sendGenericSimple(sourceAddr, msg->id, SUBACK); // sending SUBACK
+                //atomic {
+                    if (!checkClients(sourceAddr, subClients, nSubClients)){
+                        // only if not already subscribed
+                        for (i=0; i<msg->numOfSubs; i++){
+                            // Saving the client subscriptions
+                            sub_item_t incomingSub = msg->subscriptions[i];
+                            my_sub_t sub;
+                            sub.address_id = sourceAddr;
+                            sub.qos = incomingSub.qos;
+                            
+                            /*printf("broker -- Saving SUB of %d to topic %d\n", sourceAddr, incomingSub.topic);
+                            printfflush();*/
+                            
+                            switch (incomingSub.topic){
+                                case (TEMPERATURE):
+                                   tempSub[numTempSub++] = sub;
+                                   break;
 
-                if (checkClients(sourceAddr, subClients, nSubClients))
-                    return packet;
+                                case (HUMIDITY):
+                                   humSub[numHumSub++] = sub;
+                                   break;
 
-                for (i=0; i<msg->numOfSubs; i++){
-                    // Saving the client subscriptions
-                    sub_item_t incomingSub = msg->subscriptions[i];
-                    my_sub_t sub;
-                    sub.address_id = sourceAddr;
-                    sub.qos = incomingSub.qos;
-                    atomic {
-                    dbg("broker", "Saving SUB of %d to topic %d\n", sourceAddr, incomingSub.topic);
-                    //printfflush();*/
-                    
-                        switch (incomingSub.topic){
-                            case (TEMPERATURE):
-                               tempSub[numTempSub++] = sub;
-                               break;
-
-                            case (HUMIDITY):
-                               humSub[numHumSub++] = sub;
-                               break;
-
-                            case (LUMINOSITY):
-                               lumSub[numLumSub++] = sub;
-                               break;
+                                case (LUMINOSITY):
+                                   lumSub[numLumSub++] = sub;
+                                   break;
+                            }
+                            
                         }
+                        subClients[nSubClients++] = sourceAddr;    
                     }
-                }
-                subClients[nSubClients++] = sourceAddr;
+                //}    
                 return packet;
             }
         }
         return packet;
     }
 
-    event void SendSimple.sendDone(message_t* msg, error_t err) {}
+    event void SendSimple.sendDone(message_t* msg, error_t err) {
 
-    event void SendPub.sendDone(message_t* msg, error_t err) {}
+    }
 
-    event void SendSub.sendDone(message_t* msg, error_t err) {}
+    event void SendPub.sendDone(message_t* msg, error_t err) {
+        publish_msg_t* pubMsg = (publish_msg_t*) (call Packet.getPayload(msg, sizeof(publish_msg_t)));
+        //printf("%d!", pubMsg->qos);
+        //printfflush();
+        if(pubMsg->qos == 1){
+            if(!(call PacketAcknowledgements.wasAcked(msg))){
+                //printf("no ack resend");
+                //printfflush();
+                call SendPub.send(brokerAddress, msg, sizeof(publish_msg_t));
+                return;
+            }
+        }
+
+        call TimerPub.startOneShot(TOS_NODE_ID * PUBLISHTIMER);
+        
+            //printf("client_%d: Resend SUBSCRIBE\n", TOS_NODE_ID);
+            //printfflush();
+        //} else {
+            //printf("client_%d: SUBACK received\n", TOS_NODE_ID);
+            //printfflush();
+        //}
+    }
+
+    event void SendSub.sendDone(message_t* msg, error_t err) {
+        //printf("SendDone!");
+        //printfflush();
+        if(!(call PacketAcknowledgements.wasAcked(msg))){
+            //printf("No ack Resend!");
+            //printfflush();
+            call SendSub.send(brokerAddress, msg, sizeof(subscribe_msg_t));
+            return;
+        } else
+        // RECEIVED SUBACKsendDone
+            //printf("Ack start Publish");
+            //printfflush();
+            call TimerPub.startOneShot(TOS_NODE_ID * PUBLISHTIMER);
+
+            //printf("client_%d: Resend SUBSCRIBE\n", TOS_NODE_ID);
+            //printfflush();
+        //} else {
+            //printf("client_%d: SUBACK received\n", TOS_NODE_ID);
+            //printfflush();
+        //}
+    }
 
     /*********************CLIENTS**********************/
     /*
@@ -400,20 +454,23 @@ implementation {
         msg->payload = call Read.rand16();
         
         //randomize the qos
-        if ((call Read.rand16()) % 2 == 0)
-        {
-          msg->qos = 0;  
-        } else {
-          msg->qos = 1;
-        } 
+        //if ((call Read.rand16()) % 2 == 0)
+        //{
+            msg->qos = 0;
+            call PacketAcknowledgements.noAck(&packet);
+        //} else {
+        //    msg->qos = 1;
+        //    call PacketAcknowledgements.requestAck(&packet);
+        //} 
 
 
         if(call SendPub.send(brokerAddress, &packet, sizeof(publish_msg_t)) == SUCCESS){
-            //atomic {
-            dbg("client", "%d - Send PUBLISH - msg_id: %d\n", TOS_NODE_ID, msg->id);
-            dbg("client", "%d - topic %d", "payload %d", "qos %d\n", TOS_NODE_ID, msg->topic, msg->payload, msg->qos);
             
-            //printfflush();}
+            printf("client -- %d - Send PUBLISH - msg_id: %d\n", TOS_NODE_ID, msg->id);
+            printf("client -- %d - -- topic %d -- payload %d -- qos %d\n", TOS_NODE_ID, msg->topic, msg->payload, msg->qos);
+            //printf("client -- %d - -- payload %d\n", TOS_NODE_ID, msg->payload);
+            //printf("client -- %d - -- qos %d\n", TOS_NODE_ID, msg->qos);
+            printfflush();
             
         }
         
@@ -432,8 +489,8 @@ implementation {
     event void TimerAckConnect.fired() {
         // CONNACK not received in Timeout, Resend CONNECT
         if(call SendSimple.send(AM_BROADCAST_ADDR, &toResendMsg, sizeof(simple_msg_t)) == SUCCESS){
-            dbg("client", "%d - Resend CONNECT message\n", TOS_NODE_ID);
-            //dbgflush();
+            //printf("client -- %d - Resend CONNECT message\n", TOS_NODE_ID);
+            //printfflush();
         }
         // wait for CONNACK
         call TimerAckConnect.startOneShot(ACKTIMEOUT);
@@ -443,31 +500,32 @@ implementation {
     /*
      * Timer used to resend SUBSCRIBE if the SUBACK is not received  
      */
-    event void TimerAckSub.fired() {
+    event void TimerSub.fired() {
         // SUBACK not received, resending SUBSCRIBE
-        if(call SendSub.send(brokerAddress, &toResendMsg, sizeof(subscribe_msg_t)) == SUCCESS){
-            dbg("client", "%d - Resend SUBSCRIBE message\n", TOS_NODE_ID);
-            //dbgflush();
-        }
+        //if(call SendSub.send(brokerAddress, &toResendMsg, sizeof(subscribe_msg_t)) == SUCCESS){
+            //printf("client -- %d - Resend SUBSCRIBE message\n", TOS_NODE_ID);
+            //printfflush();
+        //}
         // wait for SUBACK
-        call TimerAckSub.startOneShot(ACKTIMEOUT);
+        //call TimerAckSub.startOneShot(ACKTIMEOUT);
+        post sendSubscribe();
     }
 
     /*
      * Timer used to resend PUBLISH if the SUBACK is not received  
      */
-    event void TimerAckPub.fired() {
+    /*event void TimerAckPub.fired() {
         // PUBACK not received, resending PUBLISH
         // in case of client num will always be 0
 
         am_addr_t dest = call AMPacket.destination(&toResendMsg);
 
         if(call SendPub.send(dest, &toResendMsg, sizeof(publish_msg_t)) == SUCCESS){
-            dbg("ResendPub", "%d - Resend PUBLISH message\n", TOS_NODE_ID);
-            //dbgflush();
+            //printf("ResendPub -- %d - Resend PUBLISH message\n", TOS_NODE_ID);
+            //printfflush();
         }
         // wait for PUBACK
         call TimerAckPub.startOneShot(ACKTIMEOUT);
-    }
+    }*/
 
 }

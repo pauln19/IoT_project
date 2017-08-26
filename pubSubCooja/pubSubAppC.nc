@@ -1,4 +1,10 @@
 #include "messages.h"
+#include "printf.h"
+
+/*
+in Makefile for printf
+CFLAGS += -I/home/user/tinyos-main/tos/lib/printf
+*/
 
 configuration pubSubAppC {}
 
@@ -13,16 +19,19 @@ implementation {
     components new AMReceiverC(AM_SIMPLE_MSG) as RecSimple;
 
     components new AMSenderC(AM_PUBLISH_MSG) as SendPub;
-    components new AMReceiverC(AM_PUBLISH_MSG) as RecPub;
+    components new AMReceiverC(AM_PUBLISH_MSG) as ReceivePub;
 
     components new AMSenderC(AM_SUBSCRIBE_MSG) as SendSub;
     components new AMReceiverC(AM_SUBSCRIBE_MSG) as RecSub;
 
     components new TimerMilliC() as TimerPub;
     components new TimerMilliC() as TimerAckConnect;
-    components new TimerMilliC() as TimerAckSub;
+    components new TimerMilliC() as TimerSub;
 
-    components new TimerMilliC() as Timer0;
+    //components new TimerMilliC() as Timer0;
+
+    components SerialPrintfC;
+    components SerialStartC;
     
     App.Boot -> MainC.Boot;
     App.SplitControl -> ActiveMessageC;
@@ -34,18 +43,19 @@ implementation {
     App.ReceiveSimple -> RecSimple;
 
     App.SendPub -> SendPub;
-    App.ReceivePub -> RecPub;
+    App.ReceivePub -> ReceivePub;
 
     App.SendSub -> SendSub;
     App.ReceiveSub -> RecSub;
 
     App.AMPacket -> SendPub;
     App.Packet -> SendPub;
+    App.PacketAcknowledgements -> ActiveMessageC;
 
     App.TimerPub -> TimerPub;
     App.TimerAckConnect -> TimerAckConnect;
-    App.TimerAckSub -> TimerAckSub;
+    App.TimerSub -> TimerSub;
     
-    App.TimerAckPub -> Timer0;
+    //App.TimerAckPub -> Timer0;
 
 }
