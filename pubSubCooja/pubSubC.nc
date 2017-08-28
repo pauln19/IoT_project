@@ -46,27 +46,28 @@ implementation {
 
     uint16_t subClients[NUMCLIENTS];
     uint8_t nSubClients = 0;
-    message_t toResendMsg;
+    message_t message;
     bool busy = FALSE;
     bool forwarding = FALSE;
 
     /*
      * Function used by both broker and clients for sending ACKS or CONNECT messages    
      */
-    message_t sendGenericSimple(uint16_t destAddress, uint16_t id, uint8_t type) 
+    void sendGenericSimple(uint16_t destAddress, uint16_t id, uint8_t type) 
     {
-        message_t packet;
+        simple_msg_t* msg;
+        call Packet.clear(&message);
 
-        simple_msg_t* msg = (simple_msg_t*) (call Packet.getPayload(&packet, sizeof(simple_msg_t)));
+        msg = (simple_msg_t*) (call Packet.getPayload(&message, sizeof(simple_msg_t)));
         msg->id = id;
         msg->address = TOS_NODE_ID;
         msg->simple_msg_type = type;
-        if(call SendSimple.send(destAddress, &packet, sizeof(simple_msg_t)) == SUCCESS){
+        if(call SendSimple.send(destAddress, &message, sizeof(simple_msg_t)) == SUCCESS){
             atomic {
             printf("SimpleMessage -- %d - Send %d message to %d\n", TOS_NODE_ID, type, destAddress);
             printfflush();}
         }
-        return packet;
+        
     }
 
     /*********************CLIENTS**********************/
@@ -75,11 +76,12 @@ implementation {
      */
     task void sendSubscribe() 
     {
-        message_t packet;
+        
+        subscribe_msg_t* msg;
         uint32_t subCounter = 0;
         int tmpId = TOS_NODE_ID;
-
-        subscribe_msg_t* msg = (subscribe_msg_t*) (call Packet.getPayload(&packet, sizeof(subscribe_msg_t)));
+        call Packet.clear(&message);
+        msg = (subscribe_msg_t*) (call Packet.getPayload(&message, sizeof(subscribe_msg_t)));
         
         busy = TRUE;
 
@@ -116,9 +118,9 @@ implementation {
         msg->id = counter++;
         msg->address = TOS_NODE_ID;
         msg->numOfSubs = subCounter;
-        call PacketAcknowledgements.requestAck(&packet);
+        call PacketAcknowledgements.requestAck(&message);
                 
-        if (call SendSub.send(brokerAddress, &packet, sizeof(subscribe_msg_t)) == SUCCESS) {
+        if (call SendSub.send(brokerAddress, &message, sizeof(subscribe_msg_t)) == SUCCESS) {
             printf("client -- %d - Send SUBSCRIBE - msg_id: %d\n", TOS_NODE_ID, msg->id);
             printfflush();
         }
@@ -182,7 +184,7 @@ implementation {
                 /*********************CLIENTS**********************/
                 // Send connect message to Broker
                 busy = TRUE;
-                toResendMsg = sendGenericSimple(AM_BROADCAST_ADDR, counter++, CONNECT);
+                sendGenericSimple(AM_BROADCAST_ADDR, counter++, CONNECT);
                 // wait for CONNACK
                 call TimerAckConnect.startOneShot(ACKTIMEOUT);
             }
@@ -290,7 +292,7 @@ implementation {
                     printf("client -- %d - Received forwarded PUB from: %d\n       --  id %d -- topic %d  -- qos %d\n", TOS_NODE_ID, sourceAddr, msg->id, msg->topic, msg->qos);
                     //printf("client -- %d -  %d\n", TOS_NODE_ID, );
                     //printf("client -- %d - -- id %d -- topic %d \n", TOS_NODE_ID, msg->id, msg->topic);
-                    //printf("client -- %d - -- payload %d\n", TOS_NODE_ID, msg->payload);
+                    //printf("client -- %d - -- payload %d\n", TOS_NODE_ID, msg->data);
                     printfflush();
                     busy = FALSE;
 
@@ -420,9 +422,9 @@ implementation {
     event void TimerPub.fired() {
         
         if (!busy) {
-            message_t packet;
-
-            publish_msg_t* msg = (publish_msg_t*) (call Packet.getPayload(&packet, sizeof(publish_msg_t)));
+            publish_msg_t* msg;
+            call Packet.clear(&message);
+            msg = (publish_msg_t*) (call Packet.getPayload(&message, sizeof(publish_msg_t)));
             busy = TRUE;
 
             msg->id = counter++;
@@ -442,24 +444,24 @@ implementation {
             }
 
             
-            msg->payload = call Read.rand16();
+            msg->data = call Read.rand16();
             
             //randomize the qos
             if ((call Read.rand16()) % 2 == 0)
             {
                 msg->qos = 0;
-                call PacketAcknowledgements.noAck(&packet);
+                call PacketAcknowledgements.noAck(&message);
             } else {
                 msg->qos = 1;
-                call PacketAcknowledgements.requestAck(&packet);
+                call PacketAcknowledgements.requestAck(&message);
             } 
 
 
-            if(call SendPub.send(brokerAddress, &packet, sizeof(publish_msg_t)) == SUCCESS){
+            if(call SendPub.send(brokerAddress, &message, sizeof(publish_msg_t)) == SUCCESS){
                 
                 printf("client -- %d - Send PUBLISH - msg_id: %d\n", TOS_NODE_ID, msg->id);
-                printf("client -- %d - -- topic %d -- payload %d -- qos %d\n", TOS_NODE_ID, msg->topic, msg->payload, msg->qos);
-                //printf("client -- %d - -- payload %d\n", TOS_NODE_ID, msg->payload);
+                printf("client -- %d - -- topic %d -- payload %d -- qos %d\n", TOS_NODE_ID, msg->topic, msg->data, msg->qos);
+                //printf("client -- %d - -- payload %d\n", TOS_NODE_ID, msg->data);
                 //printf("client -- %d - -- qos %d\n", TOS_NODE_ID, msg->qos);
                 printfflush();
                 
@@ -474,7 +476,7 @@ implementation {
      */
     event void TimerAckConnect.fired() {
         // CONNACK not received in Timeout, Resend CONNECT
-        if(call SendSimple.send(AM_BROADCAST_ADDR, &toResendMsg, sizeof(simple_msg_t)) == SUCCESS){
+        if(call SendSimple.send(AM_BROADCAST_ADDR, &message, sizeof(simple_msg_t)) == SUCCESS){
             //printf("client -- %d - Resend CONNECT message\n", TOS_NODE_ID);
             //printfflush();
         }

@@ -39,7 +39,7 @@ typedef nx_struct publish_msg {
     nx_uint16_t id;
     nx_uint8_t topic;
     nx_bool qos;
-    nx_uint16_t payload;
+    nx_uint16_t data;
 } publish_msg_t;
 //8 -> 24
 enum {
