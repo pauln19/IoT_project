@@ -1,11 +1,6 @@
 #include "messages.h"
 #include "printf.h"
 
-/*
-in Makefile for printf
-CFLAGS += -I/home/user/tinyos-main/tos/lib/printf
-*/
-
 configuration pubSubAppC {}
 
 implementation {
@@ -28,7 +23,6 @@ implementation {
     components new TimerMilliC() as TimerAckConnect;
     components new TimerMilliC() as TimerSub;
 
-    //components new TimerMilliC() as Timer0;
 
     components SerialPrintfC;
     components SerialStartC;
@@ -55,7 +49,4 @@ implementation {
     App.TimerPub -> TimerPub;
     App.TimerAckConnect -> TimerAckConnect;
     App.TimerSub -> TimerSub;
-    
-    //App.TimerAckPub -> Timer0;
-
 }

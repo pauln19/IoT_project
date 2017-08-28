@@ -1,0 +1,1051 @@
+00:04.167	ID:8	radio -- node 8 - Radio on!
+00:04.171	ID:8	node_8 - Send 1 message to -1
+00:04.331	ID:2	radio -- node 2 - Radio on!
+00:04.334	ID:2	node_2 - Send 1 message to -1
+00:04.345	ID:6	radio -- node 6 - Radio on!
+00:04.349	ID:6	node_6 - Send 1 message to -1
+00:04.443	ID:4	radio -- node 4 - Radio on!
+00:04.446	ID:4	node_4 - Send 1 message to -1
+00:04.477	ID:1	radio -- node 1 - Radio on!
+00:04.496	ID:7	radio -- node 7 - Radio on!
+00:04.499	ID:7	node_7 - Send 1 message to -1
+00:04.511	ID:1	broker -- Received CONNECT - from: 7
+00:04.514	ID:1	node_1 - Send 0 message to 7
+00:04.520	ID:7	client_7 -- Received CONNACK
+00:04.803	ID:9	radio -- node 9 - Radio on!
+00:04.806	ID:9	node_9 - Send 1 message to -1
+00:04.811	ID:5	radio -- node 5 - Radio on!
+00:04.812	ID:1	broker -- Received CONNECT - from: 9
+00:04.814	ID:5	node_5 - Send 1 message to -1
+00:04.815	ID:1	node_1 - Send 0 message to 9
+00:04.821	ID:9	client_9 -- Received CONNACK
+00:04.825	ID:1	broker -- Received CONNECT - from: 5
+00:04.829	ID:1	node_1 - Send 0 message to 5
+00:04.831	ID:5	client_5 -- Received CONNACK
+00:04.994	ID:3	radio -- node 3 - Radio on!
+00:04.997	ID:3	node_3 - Send 1 message to -1
+00:05.004	ID:1	broker -- Received CONNECT - from: 3
+00:05.007	ID:1	node_1 - Send 0 message to 3
+00:05.010	ID:3	client_3 -- Received CONNACK
+00:05.011	ID:7	client_7 -- Subscribe topic 1 with QoS 1
+00:05.014	ID:7	client_7 -- Subscribe topic 0 with QoS 1
+00:05.017	ID:7	client_7 -- Send SUBSCRIBE - msg_id: 1
+00:05.029	ID:7	client_7 -- SUBACK received
+00:05.030	ID:1	broker -- Saving SUB of 7 to topic 1
+00:05.031	ID:1	broker -- Saving SUB of 7 to topic 0
+00:05.311	ID:9	client_9 -- Subscribe topic 0 with QoS 1
+00:05.313	ID:9	client_9 -- Subscribe topic 2 with QoS 1
+00:05.315	ID:9	client_9 -- Subscribe topic 1 with QoS 1
+00:05.319	ID:9	client_9 -- Send SUBSCRIBE - msg_id: 1
+00:05.321	ID:5	client_5 -- Subscribe topic 2 with QoS 1
+00:05.324	ID:5	client_5 -- Subscribe topic 1 with QoS 1
+00:05.327	ID:5	client_5 -- Send SUBSCRIBE - msg_id: 1
+00:05.331	ID:9	client_9 -- SUBACK received
+00:05.331	ID:1	broker -- Saving SUB of 9 to topic 0
+00:05.333	ID:1	broker -- Saving SUB of 9 to topic 2
+00:05.335	ID:1	broker -- Saving SUB of 9 to topic 1
+00:05.338	ID:5	client_5 -- SUBACK received
+00:05.339	ID:1	broker -- Saving SUB of 5 to topic 2
+00:05.340	ID:1	broker -- Saving SUB of 5 to topic 1
+00:05.501	ID:3	client_3 -- Subscribe topic 0 with QoS 1
+00:05.504	ID:3	client_3 -- Send SUBSCRIBE - msg_id: 1
+00:05.514	ID:3	client_3 -- SUBACK received
+00:05.514	ID:1	broker -- Saving SUB of 3 to topic 0
+00:09.062	ID:1	broker -- Received CONNECT - from: 8
+00:09.064	ID:1	node_1 - Send 0 message to 8
+00:09.073	ID:8	client_8 -- Received CONNACK
+00:09.222	ID:1	broker -- Received CONNECT - from: 2
+00:09.225	ID:1	node_1 - Send 0 message to 2
+00:09.236	ID:2	client_2 -- Received CONNACK
+00:09.240	ID:1	broker -- Received CONNECT - from: 6
+00:09.243	ID:1	node_1 - Send 0 message to 6
+00:09.250	ID:6	client_6 -- Received CONNACK
+00:09.343	ID:1	broker -- Received CONNECT - from: 4
+00:09.346	ID:1	node_1 - Send 0 message to 4
+00:09.353	ID:4	client_4 -- Received CONNACK
+00:09.564	ID:8	client_8 -- Subscribe topic 2 with QoS 0
+00:09.566	ID:8	client_8 -- Subscribe topic 1 with QoS 0
+00:09.569	ID:8	client_8 -- Send SUBSCRIBE - msg_id: 1
+00:09.575	ID:8	client_8 -- SUBACK received
+00:09.575	ID:1	broker -- Saving SUB of 8 to topic 2
+00:09.577	ID:1	broker -- Saving SUB of 8 to topic 1
+00:09.726	ID:2	client_2 -- Subscribe topic 2 with QoS 0
+00:09.729	ID:2	client_2 -- Send SUBSCRIBE - msg_id: 1
+00:09.737	ID:2	client_2 -- SUBACK received
+00:09.737	ID:1	broker -- Saving SUB of 2 to topic 2
+00:09.741	ID:6	client_6 -- Subscribe topic 0 with QoS 0
+00:09.743	ID:6	client_6 -- Subscribe topic 2 with QoS 0
+00:09.746	ID:6	client_6 -- Send SUBSCRIBE - msg_id: 1
+00:09.755	ID:6	client_6 -- SUBACK received
+00:09.755	ID:1	broker -- Saving SUB of 6 to topic 0
+00:09.757	ID:1	broker -- Saving SUB of 6 to topic 2
+00:09.843	ID:4	client_4 -- Subscribe topic 1 with QoS 0
+00:09.847	ID:4	client_4 -- Send SUBSCRIBE - msg_id: 1
+00:09.854	ID:4	client_4 -- SUBACK received
+00:09.854	ID:1	broker -- Saving SUB of 4 to topic 1
+00:11.868	ID:7	client_7 -- Send PUBLISH - msg_id: 2
+00:11.873	ID:7	client_7 --      -- topic 2 -- payload 26318 -- qos 1
+00:11.875	ID:7	client_7 -- PUBACK received
+00:11.875	ID:1	broker -- Received PUB - id: 2 _ from: 7 -- topic 2
+00:11.877	ID:1	broker -- Enqueued PUBLISH - id: 2
+00:11.883	ID:1	broker -- forwardPublish 2 to 9 - qos 1 - with code 0
+00:11.884	ID:1	broker -- PUBACK received
+00:11.885	ID:9	client_9 -- Received forwarded PUB from: 7
+00:11.887	ID:9	       --  id 2 -- topic 2  -- qos 1
+00:11.890	ID:1	broker -- forwardPublish 2 to 5 - qos 1 - with code 0
+00:11.891	ID:1	broker -- PUBACK received
+00:11.892	ID:5	client_5 -- Received forwarded PUB from: 7
+00:11.894	ID:5	       --  id 2 -- topic 2  -- qos 1
+00:11.896	ID:1	broker -- forwardPublish 2 to 8 - qos 0 - with code 0
+00:11.904	ID:8	client_8 -- Received forwarded PUB from: 7
+00:11.905	ID:1	broker -- forwardPublish 2 to 2 - qos 0 - with code 0
+00:11.906	ID:8	       --  id 2 -- topic 2  -- qos 0
+00:11.913	ID:2	client_2 -- Received forwarded PUB from: 7
+00:11.914	ID:1	broker -- forwardPublish 2 to 6 - qos 0 - with code 0
+00:11.915	ID:2	       --  id 2 -- topic 2  -- qos 0
+00:11.922	ID:6	client_6 -- Received forwarded PUB from: 7
+00:11.924	ID:6	       --  id 2 -- topic 2  -- qos 0
+00:12.170	ID:9	client_9 -- Send PUBLISH - msg_id: 2
+00:12.173	ID:9	client_9 --      -- topic 1 -- payload -16255 -- qos 0
+00:12.179	ID:5	client_5 -- Send PUBLISH - msg_id: 2
+00:12.179	ID:1	broker -- Received PUB - id: 2 _ from: 9 -- topic 1
+00:12.182	ID:1	broker -- Enqueued PUBLISH - id: 2
+00:12.182	ID:5	client_5 --      -- topic 0 -- payload 3354 -- qos 0
+00:12.187	ID:1	broker -- forwardPublish 2 to 7 - qos 1 - with code 0
+00:12.195	ID:1	broker -- PUBACK received
+00:12.195	ID:7	client_7 -- Received forwarded PUB from: 9
+00:12.197	ID:7	       --  id 2 -- topic 1  -- qos 1
+00:12.199	ID:1	broker -- forwardPublish 2 to 9 - qos 1 - with code 0
+00:12.209	ID:1	broker -- PUBACK received
+00:12.210	ID:9	client_9 -- Received forwarded PUB from: 9
+00:12.212	ID:9	       --  id 2 -- topic 1  -- qos 1
+00:12.213	ID:1	broker -- forwardPublish 2 to 5 - qos 1 - with code 0
+00:12.218	ID:1	broker -- PUBACK received
+00:12.218	ID:5	client_5 -- Received forwarded PUB from: 9
+00:12.221	ID:5	       --  id 2 -- topic 1  -- qos 1
+00:12.222	ID:1	broker -- forwardPublish 2 to 8 - qos 0 - with code 0
+00:12.227	ID:8	client_8 -- Received forwarded PUB from: 9
+00:12.228	ID:1	broker -- forwardPublish 2 to 4 - qos 0 - with code 0
+00:12.229	ID:8	       --  id 2 -- topic 1  -- qos 0
+00:12.235	ID:4	client_4 -- Received forwarded PUB from: 9
+00:12.237	ID:4	       --  id 2 -- topic 1  -- qos 0
+00:12.353	ID:3	client_3 -- Send PUBLISH - msg_id: 2
+00:12.357	ID:3	client_3 --      -- topic 1 -- payload -19609 -- qos 1
+00:12.360	ID:3	client_3 -- PUBACK received
+00:12.361	ID:1	broker -- Received PUB - id: 2 _ from: 3 -- topic 1
+00:12.363	ID:1	broker -- Enqueued PUBLISH - id: 2
+00:12.367	ID:1	broker -- forwardPublish 2 to 7 - qos 1 - with code 0
+00:12.375	ID:1	broker -- PUBACK received
+00:12.375	ID:7	client_7 -- Received forwarded PUB from: 3
+00:12.377	ID:7	       --  id 2 -- topic 1  -- qos 1
+00:12.380	ID:1	broker -- forwardPublish 2 to 9 - qos 1 - with code 0
+00:12.382	ID:1	broker -- PUBACK received
+00:12.382	ID:9	client_9 -- Received forwarded PUB from: 3
+00:12.384	ID:9	       --  id 2 -- topic 1  -- qos 1
+00:12.386	ID:1	broker -- forwardPublish 2 to 5 - qos 1 - with code 0
+00:12.390	ID:1	broker -- PUBACK received
+00:12.391	ID:5	client_5 -- Received forwarded PUB from: 3
+00:12.393	ID:5	       --  id 2 -- topic 1  -- qos 1
+00:12.395	ID:1	broker -- forwardPublish 2 to 8 - qos 0 - with code 0
+00:12.398	ID:8	client_8 -- Received forwarded PUB from: 3
+00:12.400	ID:1	broker -- forwardPublish 2 to 4 - qos 0 - with code 0
+00:12.400	ID:8	       --  id 2 -- topic 1  -- qos 0
+00:12.408	ID:4	client_4 -- Received forwarded PUB from: 3
+00:12.410	ID:4	       --  id 2 -- topic 1  -- qos 0
+00:16.413	ID:8	client_8 -- Send PUBLISH - msg_id: 2
+00:16.417	ID:8	client_8 --      -- topic 0 -- payload 28030 -- qos 0
+00:16.419	ID:1	broker -- Received PUB - id: 2 _ from: 8 -- topic 0
+00:16.421	ID:1	broker -- Enqueued PUBLISH - id: 2
+00:16.426	ID:1	broker -- forwardPublish 2 to 7 - qos 1 - with code 0
+00:16.429	ID:1	broker -- PUBACK received
+00:16.429	ID:7	client_7 -- Received forwarded PUB from: 8
+00:16.432	ID:7	       --  id 2 -- topic 0  -- qos 1
+00:16.434	ID:1	broker -- forwardPublish 2 to 9 - qos 1 - with code 0
+00:16.436	ID:1	broker -- PUBACK received
+00:16.437	ID:9	client_9 -- Received forwarded PUB from: 8
+00:16.439	ID:9	       --  id 2 -- topic 0  -- qos 1
+00:16.442	ID:1	broker -- forwardPublish 2 to 3 - qos 1 - with code 0
+00:16.443	ID:1	broker -- PUBACK received
+00:16.443	ID:3	client_3 -- Received forwarded PUB from: 8
+00:16.445	ID:3	       --  id 2 -- topic 0  -- qos 1
+00:16.447	ID:1	broker -- forwardPublish 2 to 6 - qos 0 - with code 0
+00:16.453	ID:6	client_6 -- Received forwarded PUB from: 8
+00:16.455	ID:6	       --  id 2 -- topic 0  -- qos 0
+00:16.576	ID:2	client_2 -- Send PUBLISH - msg_id: 2
+00:16.580	ID:2	client_2 --      -- topic 0 -- payload 9343 -- qos 1
+00:16.582	ID:1	broker -- Received PUB - id: 2 _ from: 2 -- topic 0
+00:16.582	ID:2	client_2 -- PUBACK received
+00:16.584	ID:1	broker -- Enqueued PUBLISH - id: 2
+00:16.588	ID:1	broker -- forwardPublish 2 to 7 - qos 1 - with code 0
+00:16.592	ID:1	broker -- PUBACK received
+00:16.593	ID:7	client_7 -- Received forwarded PUB from: 2
+00:16.595	ID:6	client_6 -- Send PUBLISH - msg_id: 2
+00:16.595	ID:7	       --  id 2 -- topic 0  -- qos 1
+00:16.596	ID:1	broker -- forwardPublish 2 to 9 - qos 1 - with code 0
+00:16.598	ID:6	client_6 --      -- topic 1 -- payload 21801 -- qos 1
+00:16.603	ID:9	client_9 -- Received forwarded PUB from: 2
+00:16.604	ID:1	broker -- PUBACK received
+00:16.605	ID:9	       --  id 2 -- topic 0  -- qos 1
+00:16.605	ID:6	client_6 -- PUBACK received
+00:16.608	ID:1	broker -- forwardPublish 2 to 3 - qos 1 - with code 0
+00:16.619	ID:1	broker -- PUBACK received
+00:16.619	ID:3	client_3 -- Received forwarded PUB from: 2
+00:16.621	ID:3	       --  id 2 -- topic 0  -- qos 1
+00:16.624	ID:1	broker -- forwardPublish 2 to 6 - qos 0 - with code 0
+00:16.626	ID:6	client_6 -- Received forwarded PUB from: 2
+00:16.628	ID:6	       --  id 2 -- topic 0  -- qos 0
+00:16.694	ID:4	client_4 -- Send PUBLISH - msg_id: 2
+00:16.697	ID:4	client_4 --      -- topic 2 -- payload 15572 -- qos 0
+00:16.704	ID:1	broker -- Received PUB - id: 2 _ from: 4 -- topic 2
+00:16.707	ID:1	broker -- Enqueued PUBLISH - id: 2
+00:16.711	ID:1	broker -- forwardPublish 2 to 9 - qos 1 - with code 0
+00:16.720	ID:1	broker -- PUBACK received
+00:16.721	ID:9	client_9 -- Received forwarded PUB from: 4
+00:16.723	ID:9	       --  id 2 -- topic 2  -- qos 1
+00:16.725	ID:1	broker -- forwardPublish 2 to 5 - qos 1 - with code 0
+00:16.729	ID:1	broker -- PUBACK received
+00:16.729	ID:5	client_5 -- Received forwarded PUB from: 4
+00:16.731	ID:5	       --  id 2 -- topic 2  -- qos 1
+00:16.734	ID:1	broker -- forwardPublish 2 to 8 - qos 0 - with code 0
+00:16.736	ID:8	client_8 -- Received forwarded PUB from: 4
+00:16.738	ID:8	       --  id 2 -- topic 2  -- qos 0
+00:16.738	ID:1	broker -- forwardPublish 2 to 2 - qos 0 - with code 0
+00:16.743	ID:2	client_2 -- Received forwarded PUB from: 4
+00:16.744	ID:1	broker -- forwardPublish 2 to 6 - qos 0 - with code 0
+00:16.745	ID:2	       --  id 2 -- topic 2  -- qos 0
+00:16.751	ID:6	client_6 -- Received forwarded PUB from: 4
+00:16.753	ID:6	       --  id 2 -- topic 2  -- qos 0
+00:18.715	ID:7	client_7 -- Send PUBLISH - msg_id: 3
+00:18.718	ID:1	broker -- Received PUB - id: 3 _ from: 7 -- topic 2
+00:18.718	ID:7	client_7 --      -- topic 2 -- payload -10687 -- qos 0
+00:18.720	ID:1	broker -- Enqueued PUBLISH - id: 3
+00:18.726	ID:1	broker -- forwardPublish 3 to 9 - qos 1 - with code 0
+00:18.727	ID:1	broker -- PUBACK received
+00:18.728	ID:9	client_9 -- Received forwarded PUB from: 7
+00:18.730	ID:9	       --  id 3 -- topic 2  -- qos 1
+00:18.731	ID:1	broker -- forwardPublish 3 to 5 - qos 1 - with code 0
+00:18.741	ID:1	broker -- PUBACK received
+00:18.742	ID:5	client_5 -- Received forwarded PUB from: 7
+00:18.744	ID:5	       --  id 3 -- topic 2  -- qos 1
+00:18.745	ID:1	broker -- forwardPublish 3 to 8 - qos 0 - with code 0
+00:18.751	ID:8	client_8 -- Received forwarded PUB from: 7
+00:18.752	ID:1	broker -- forwardPublish 3 to 2 - qos 0 - with code 0
+00:18.753	ID:8	       --  id 3 -- topic 2  -- qos 0
+00:18.759	ID:2	client_2 -- Received forwarded PUB from: 7
+00:18.761	ID:1	broker -- forwardPublish 3 to 6 - qos 0 - with code 0
+00:18.762	ID:2	       --  id 3 -- topic 2  -- qos 0
+00:18.770	ID:6	client_6 -- Received forwarded PUB from: 7
+00:18.773	ID:6	       --  id 3 -- topic 2  -- qos 0
+00:19.015	ID:9	client_9 -- Send PUBLISH - msg_id: 3
+00:19.018	ID:9	client_9 --      -- topic 1 -- payload -29742 -- qos 0
+00:19.024	ID:1	broker -- Received PUB - id: 3 _ from: 9 -- topic 1
+00:19.024	ID:5	client_5 -- Send PUBLISH - msg_id: 3
+00:19.026	ID:1	broker -- Enqueued PUBLISH - id: 3
+00:19.027	ID:5	client_5 --      -- topic 0 -- payload 8369 -- qos 0
+00:19.031	ID:1	broker -- forwardPublish 3 to 7 - qos 1 - with code 0
+00:19.040	ID:1	broker -- PUBACK received
+00:19.040	ID:7	client_7 -- Received forwarded PUB from: 9
+00:19.042	ID:7	       --  id 3 -- topic 1  -- qos 1
+00:19.044	ID:1	broker -- forwardPublish 3 to 9 - qos 1 - with code 0
+00:19.050	ID:1	broker -- PUBACK received
+00:19.051	ID:9	client_9 -- Received forwarded PUB from: 9
+00:19.053	ID:9	       --  id 3 -- topic 1  -- qos 1
+00:19.055	ID:1	broker -- forwardPublish 3 to 5 - qos 1 - with code 0
+00:19.058	ID:1	broker -- PUBACK received
+00:19.059	ID:5	client_5 -- Received forwarded PUB from: 9
+00:19.061	ID:5	       --  id 3 -- topic 1  -- qos 1
+00:19.062	ID:1	broker -- forwardPublish 3 to 8 - qos 0 - with code 0
+00:19.072	ID:8	client_8 -- Received forwarded PUB from: 9
+00:19.073	ID:1	broker -- forwardPublish 3 to 4 - qos 0 - with code 0
+00:19.074	ID:8	       --  id 3 -- topic 1  -- qos 0
+00:19.081	ID:4	client_4 -- Received forwarded PUB from: 9
+00:19.083	ID:4	       --  id 3 -- topic 1  -- qos 0
+00:19.200	ID:3	client_3 -- Send PUBLISH - msg_id: 3
+00:19.203	ID:1	broker -- Received PUB - id: 3 _ from: 3 -- topic 1
+00:19.203	ID:3	client_3 --      -- topic 1 -- payload 27424 -- qos 0
+00:19.205	ID:1	broker -- Enqueued PUBLISH - id: 3
+00:19.209	ID:1	broker -- forwardPublish 3 to 7 - qos 1 - with code 0
+00:19.219	ID:1	broker -- PUBACK received
+00:19.219	ID:7	client_7 -- Received forwarded PUB from: 3
+00:19.222	ID:7	       --  id 3 -- topic 1  -- qos 1
+00:19.224	ID:1	broker -- forwardPublish 3 to 9 - qos 1 - with code 0
+00:19.226	ID:1	broker -- PUBACK received
+00:19.227	ID:9	client_9 -- Received forwarded PUB from: 3
+00:19.229	ID:9	       --  id 3 -- topic 1  -- qos 1
+00:19.231	ID:1	broker -- forwardPublish 3 to 5 - qos 1 - with code 0
+00:19.239	ID:1	broker -- PUBACK received
+00:19.240	ID:5	client_5 -- Received forwarded PUB from: 3
+00:19.242	ID:5	       --  id 3 -- topic 1  -- qos 1
+00:19.244	ID:1	broker -- forwardPublish 3 to 8 - qos 0 - with code 0
+00:19.246	ID:8	client_8 -- Received forwarded PUB from: 3
+00:19.248	ID:8	       --  id 3 -- topic 1  -- qos 0
+00:19.249	ID:1	broker -- forwardPublish 3 to 4 - qos 0 - with code 0
+00:19.254	ID:4	client_4 -- Received forwarded PUB from: 3
+00:19.256	ID:4	       --  id 3 -- topic 1  -- qos 0
+00:23.257	ID:8	client_8 -- Send PUBLISH - msg_id: 3
+00:23.260	ID:8	client_8 --      -- topic 0 -- payload 1432 -- qos 0
+00:23.269	ID:1	broker -- Received PUB - id: 3 _ from: 8 -- topic 0
+00:23.271	ID:1	broker -- Enqueued PUBLISH - id: 3
+00:23.275	ID:1	broker -- forwardPublish 3 to 7 - qos 1 - with code 0
+00:23.286	ID:1	broker -- PUBACK received
+00:23.287	ID:7	client_7 -- Received forwarded PUB from: 8
+00:23.289	ID:7	       --  id 3 -- topic 0  -- qos 1
+00:23.292	ID:1	broker -- forwardPublish 3 to 9 - qos 1 - with code 0
+00:23.293	ID:9	client_9 -- Received forwarded PUB from: 8
+00:23.293	ID:1	broker -- PUBACK received
+00:23.295	ID:9	       --  id 3 -- topic 0  -- qos 1
+00:23.297	ID:1	broker -- forwardPublish 3 to 3 - qos 1 - with code 0
+00:23.302	ID:1	broker -- PUBACK received
+00:23.303	ID:3	client_3 -- Received forwarded PUB from: 8
+00:23.305	ID:3	       --  id 3 -- topic 0  -- qos 1
+00:23.306	ID:1	broker -- forwardPublish 3 to 6 - qos 0 - with code 0
+00:23.317	ID:6	client_6 -- Received forwarded PUB from: 8
+00:23.319	ID:6	       --  id 3 -- topic 0  -- qos 0
+00:23.422	ID:2	client_2 -- Send PUBLISH - msg_id: 3
+00:23.426	ID:2	client_2 --      -- topic 0 -- payload -21368 -- qos 0
+00:23.426	ID:1	broker -- Received PUB - id: 3 _ from: 2 -- topic 0
+00:23.428	ID:1	broker -- Enqueued PUBLISH - id: 3
+00:23.432	ID:1	broker -- forwardPublish 3 to 7 - qos 1 - with code 0
+00:23.440	ID:1	broker -- PUBACK received
+00:23.441	ID:7	client_7 -- Received forwarded PUB from: 2
+00:23.443	ID:7	       --  id 3 -- topic 0  -- qos 1
+00:23.445	ID:6	client_6 -- Send PUBLISH - msg_id: 3
+00:23.445	ID:1	broker -- forwardPublish 3 to 9 - qos 1 - with code 0
+00:23.448	ID:1	broker -- PUBACK received
+00:23.449	ID:9	client_9 -- Received forwarded PUB from: 2
+00:23.449	ID:6	client_6 --      -- topic 1 -- payload -6168 -- qos 0
+00:23.451	ID:9	       --  id 3 -- topic 0  -- qos 1
+00:23.454	ID:1	broker -- forwardPublish 3 to 3 - qos 1 - with code 0
+00:23.460	ID:1	broker -- PUBACK received
+00:23.461	ID:3	client_3 -- Received forwarded PUB from: 2
+00:23.463	ID:3	       --  id 3 -- topic 0  -- qos 1
+00:23.465	ID:1	broker -- forwardPublish 3 to 6 - qos 0 - with code 0
+00:23.469	ID:6	client_6 -- Received forwarded PUB from: 2
+00:23.471	ID:6	       --  id 3 -- topic 0  -- qos 0
+00:23.540	ID:4	client_4 -- Send PUBLISH - msg_id: 3
+00:23.544	ID:4	client_4 --      -- topic 2 -- payload -13768 -- qos 1
+00:23.545	ID:1	broker -- Received PUB - id: 3 _ from: 4 -- topic 2
+00:23.546	ID:4	client_4 -- PUBACK received
+00:23.547	ID:1	broker -- Enqueued PUBLISH - id: 3
+00:23.551	ID:1	broker -- forwardPublish 3 to 9 - qos 1 - with code 0
+00:23.557	ID:1	broker -- PUBACK received
+00:23.557	ID:9	client_9 -- Received forwarded PUB from: 4
+00:23.559	ID:9	       --  id 3 -- topic 2  -- qos 1
+00:23.561	ID:1	broker -- forwardPublish 3 to 5 - qos 1 - with code 0
+00:23.572	ID:1	broker -- PUBACK received
+00:23.572	ID:5	client_5 -- Received forwarded PUB from: 4
+00:23.574	ID:5	       --  id 3 -- topic 2  -- qos 1
+00:23.577	ID:1	broker -- forwardPublish 3 to 8 - qos 0 - with code 0
+00:23.580	ID:8	client_8 -- Received forwarded PUB from: 4
+00:23.582	ID:1	broker -- forwardPublish 3 to 2 - qos 0 - with code 0
+00:23.582	ID:8	       --  id 3 -- topic 2  -- qos 0
+00:23.584	ID:2	client_2 -- Received forwarded PUB from: 4
+00:23.587	ID:2	       --  id 3 -- topic 2  -- qos 0
+00:23.587	ID:1	broker -- forwardPublish 3 to 6 - qos 0 - with code 0
+00:23.590	ID:6	client_6 -- Received forwarded PUB from: 4
+00:23.592	ID:6	       --  id 3 -- topic 2  -- qos 0
+00:25.558	ID:7	client_7 -- Send PUBLISH - msg_id: 4
+00:25.562	ID:7	client_7 --      -- topic 2 -- payload 31261 -- qos 1
+00:25.566	ID:7	client_7 -- PUBACK received
+00:25.566	ID:1	broker -- Received PUB - id: 4 _ from: 7 -- topic 2
+00:25.568	ID:1	broker -- Enqueued PUBLISH - id: 4
+00:25.574	ID:1	broker -- forwardPublish 4 to 9 - qos 1 - with code 0
+00:25.575	ID:1	broker -- PUBACK received
+00:25.576	ID:9	client_9 -- Received forwarded PUB from: 7
+00:25.578	ID:9	       --  id 4 -- topic 2  -- qos 1
+00:25.580	ID:1	broker -- forwardPublish 4 to 5 - qos 1 - with code 0
+00:25.583	ID:1	broker -- PUBACK received
+00:25.583	ID:5	client_5 -- Received forwarded PUB from: 7
+00:25.585	ID:5	       --  id 4 -- topic 2  -- qos 1
+00:25.587	ID:1	broker -- forwardPublish 4 to 8 - qos 0 - with code 0
+00:25.597	ID:8	client_8 -- Received forwarded PUB from: 7
+00:25.598	ID:1	broker -- forwardPublish 4 to 2 - qos 0 - with code 0
+00:25.599	ID:8	       --  id 4 -- topic 2  -- qos 0
+00:25.603	ID:2	client_2 -- Received forwarded PUB from: 7
+00:25.604	ID:1	broker -- forwardPublish 4 to 6 - qos 0 - with code 0
+00:25.605	ID:2	       --  id 4 -- topic 2  -- qos 0
+00:25.609	ID:6	client_6 -- Received forwarded PUB from: 7
+00:25.611	ID:6	       --  id 4 -- topic 2  -- qos 0
+00:25.860	ID:9	client_9 -- Send PUBLISH - msg_id: 4
+00:25.864	ID:9	client_9 --      -- topic 1 -- payload -10076 -- qos 1
+00:25.865	ID:1	broker -- Received PUB - id: 4 _ from: 9 -- topic 1
+00:25.866	ID:9	client_9 -- PUBACK received
+00:25.867	ID:1	broker -- Enqueued PUBLISH - id: 4
+00:25.868	ID:5	client_5 -- Send PUBLISH - msg_id: 4
+00:25.871	ID:1	broker -- forwardPublish 4 to 7 - qos 1 - with code 0
+00:25.871	ID:5	client_5 --      -- topic 0 -- payload 7062 -- qos 1
+00:25.876	ID:1	broker -- PUBACK received
+00:25.877	ID:7	client_7 -- Received forwarded PUB from: 9
+00:25.879	ID:7	       --  id 4 -- topic 1  -- qos 1
+00:25.880	ID:5	client_5 -- PUBACK received
+00:25.882	ID:1	broker -- forwardPublish 4 to 9 - qos 1 - with code 0
+00:25.892	ID:1	broker -- PUBACK received
+00:25.893	ID:9	client_9 -- Received forwarded PUB from: 9
+00:25.895	ID:9	       --  id 4 -- topic 1  -- qos 1
+00:25.896	ID:1	broker -- forwardPublish 4 to 5 - qos 1 - with code 0
+00:25.903	ID:1	broker -- PUBACK received
+00:25.904	ID:5	client_5 -- Received forwarded PUB from: 9
+00:25.906	ID:5	       --  id 4 -- topic 1  -- qos 1
+00:25.908	ID:1	broker -- forwardPublish 4 to 8 - qos 0 - with code 0
+00:25.910	ID:8	client_8 -- Received forwarded PUB from: 9
+00:25.912	ID:8	       --  id 4 -- topic 1  -- qos 0
+00:25.913	ID:1	broker -- forwardPublish 4 to 4 - qos 0 - with code 0
+00:25.922	ID:4	client_4 -- Received forwarded PUB from: 9
+00:25.924	ID:4	       --  id 4 -- topic 1  -- qos 0
+00:26.043	ID:3	client_3 -- Send PUBLISH - msg_id: 4
+00:26.048	ID:3	client_3 --      -- topic 1 -- payload -17138 -- qos 1
+00:26.049	ID:1	broker -- Received PUB - id: 4 _ from: 3 -- topic 1
+00:26.049	ID:3	client_3 -- PUBACK received
+00:26.051	ID:1	broker -- Enqueued PUBLISH - id: 4
+00:26.057	ID:1	broker -- forwardPublish 4 to 7 - qos 1 - with code 0
+00:26.058	ID:7	client_7 -- Received forwarded PUB from: 3
+00:26.058	ID:1	broker -- PUBACK received
+00:26.060	ID:7	       --  id 4 -- topic 1  -- qos 1
+00:26.062	ID:1	broker -- forwardPublish 4 to 9 - qos 1 - with code 0
+00:26.072	ID:1	broker -- PUBACK received
+00:26.072	ID:9	client_9 -- Received forwarded PUB from: 3
+00:26.074	ID:9	       --  id 4 -- topic 1  -- qos 1
+00:26.077	ID:1	broker -- forwardPublish 4 to 5 - qos 1 - with code 0
+00:26.079	ID:1	broker -- PUBACK received
+00:26.080	ID:5	client_5 -- Received forwarded PUB from: 3
+00:26.082	ID:5	       --  id 4 -- topic 1  -- qos 1
+00:26.084	ID:1	broker -- forwardPublish 4 to 8 - qos 0 - with code 0
+00:26.088	ID:8	client_8 -- Received forwarded PUB from: 3
+00:26.089	ID:1	broker -- forwardPublish 4 to 4 - qos 0 - with code 0
+00:26.090	ID:8	       --  id 4 -- topic 1  -- qos 0
+00:26.097	ID:4	client_4 -- Received forwarded PUB from: 3
+00:26.099	ID:4	       --  id 4 -- topic 1  -- qos 0
+00:30.105	ID:8	client_8 -- Send PUBLISH - msg_id: 4
+00:30.108	ID:8	client_8 --      -- topic 0 -- payload 9917 -- qos 1
+00:30.114	ID:8	client_8 -- PUBACK received
+00:30.114	ID:1	broker -- Received PUB - id: 4 _ from: 8 -- topic 0
+00:30.116	ID:1	broker -- Enqueued PUBLISH - id: 4
+00:30.121	ID:1	broker -- forwardPublish 4 to 7 - qos 1 - with code 0
+00:30.127	ID:1	broker -- PUBACK received
+00:30.127	ID:7	client_7 -- Received forwarded PUB from: 8
+00:30.130	ID:7	       --  id 4 -- topic 0  -- qos 1
+00:30.131	ID:1	broker -- forwardPublish 4 to 9 - qos 1 - with code 0
+00:30.137	ID:1	broker -- PUBACK received
+00:30.137	ID:9	client_9 -- Received forwarded PUB from: 8
+00:30.140	ID:9	       --  id 4 -- topic 0  -- qos 1
+00:30.141	ID:1	broker -- forwardPublish 4 to 3 - qos 1 - with code 0
+00:30.151	ID:1	broker -- PUBACK received
+00:30.151	ID:3	client_3 -- Received forwarded PUB from: 8
+00:30.153	ID:3	       --  id 4 -- topic 0  -- qos 1
+00:30.155	ID:1	broker -- forwardPublish 4 to 6 - qos 0 - with code 0
+00:30.161	ID:6	client_6 -- Received forwarded PUB from: 8
+00:30.163	ID:6	       --  id 4 -- topic 0  -- qos 0
+00:30.265	ID:2	client_2 -- Send PUBLISH - msg_id: 4
+00:30.269	ID:2	client_2 --      -- topic 0 -- payload 3305 -- qos 1
+00:30.273	ID:2	client_2 -- PUBACK received
+00:30.274	ID:1	broker -- Received PUB - id: 4 _ from: 2 -- topic 0
+00:30.276	ID:1	broker -- Enqueued PUBLISH - id: 4
+00:30.280	ID:1	broker -- forwardPublish 4 to 7 - qos 1 - with code 0
+00:30.284	ID:1	broker -- PUBACK received
+00:30.285	ID:7	client_7 -- Received forwarded PUB from: 2
+00:30.287	ID:7	       --  id 4 -- topic 0  -- qos 1
+00:30.288	ID:1	broker -- forwardPublish 4 to 9 - qos 1 - with code 0
+00:30.291	ID:6	client_6 -- Send PUBLISH - msg_id: 4
+00:30.295	ID:6	client_6 --      -- topic 1 -- payload 7713 -- qos 0
+00:30.300	ID:1	broker -- PUBACK received
+00:30.301	ID:9	client_9 -- Received forwarded PUB from: 2
+00:30.303	ID:9	       --  id 4 -- topic 0  -- qos 1
+00:30.304	ID:1	broker -- forwardPublish 4 to 3 - qos 1 - with code 0
+00:30.309	ID:1	broker -- PUBACK received
+00:30.310	ID:3	client_3 -- Received forwarded PUB from: 2
+00:30.312	ID:3	       --  id 4 -- topic 0  -- qos 1
+00:30.313	ID:1	broker -- forwardPublish 4 to 6 - qos 0 - with code 0
+00:30.325	ID:6	client_6 -- Received forwarded PUB from: 2
+00:30.327	ID:6	       --  id 4 -- topic 0  -- qos 0
+00:30.385	ID:4	client_4 -- Send PUBLISH - msg_id: 4
+00:30.388	ID:4	client_4 --      -- topic 2 -- payload 5509 -- qos 1
+00:30.395	ID:4	client_4 -- PUBACK received
+00:30.396	ID:1	broker -- Received PUB - id: 4 _ from: 4 -- topic 2
+00:30.398	ID:1	broker -- Enqueued PUBLISH - id: 4
+00:30.402	ID:1	broker -- forwardPublish 4 to 9 - qos 1 - with code 0
+00:30.410	ID:1	broker -- PUBACK received
+00:30.411	ID:9	client_9 -- Received forwarded PUB from: 4
+00:30.413	ID:9	       --  id 4 -- topic 2  -- qos 1
+00:30.416	ID:1	broker -- forwardPublish 4 to 5 - qos 1 - with code 0
+00:30.417	ID:1	broker -- PUBACK received
+00:30.418	ID:5	client_5 -- Received forwarded PUB from: 4
+00:30.420	ID:5	       --  id 4 -- topic 2  -- qos 1
+00:30.422	ID:1	broker -- forwardPublish 4 to 8 - qos 0 - with code 0
+00:30.428	ID:8	client_8 -- Received forwarded PUB from: 4
+00:30.429	ID:1	broker -- forwardPublish 4 to 2 - qos 0 - with code 0
+00:30.430	ID:8	       --  id 4 -- topic 2  -- qos 0
+00:30.438	ID:2	client_2 -- Received forwarded PUB from: 4
+00:30.439	ID:1	broker -- forwardPublish 4 to 6 - qos 0 - with code 0
+00:30.440	ID:2	       --  id 4 -- topic 2  -- qos 0
+00:30.447	ID:6	client_6 -- Received forwarded PUB from: 4
+00:30.449	ID:6	       --  id 4 -- topic 2  -- qos 0
+00:32.404	ID:7	client_7 -- Send PUBLISH - msg_id: 5
+00:32.408	ID:7	client_7 --      -- topic 2 -- payload -7508 -- qos 0
+00:32.410	ID:1	broker -- Received PUB - id: 5 _ from: 7 -- topic 2
+00:32.412	ID:1	broker -- Enqueued PUBLISH - id: 5
+00:32.416	ID:1	broker -- forwardPublish 5 to 9 - qos 1 - with code 0
+00:32.422	ID:1	broker -- PUBACK received
+00:32.423	ID:9	client_9 -- Received forwarded PUB from: 7
+00:32.425	ID:9	       --  id 5 -- topic 2  -- qos 1
+00:32.426	ID:1	broker -- forwardPublish 5 to 5 - qos 1 - with code 0
+00:32.432	ID:1	broker -- PUBACK received
+00:32.433	ID:5	client_5 -- Received forwarded PUB from: 7
+00:32.435	ID:5	       --  id 5 -- topic 2  -- qos 1
+00:32.436	ID:1	broker -- forwardPublish 5 to 8 - qos 0 - with code 0
+00:32.442	ID:8	client_8 -- Received forwarded PUB from: 7
+00:32.443	ID:1	broker -- forwardPublish 5 to 2 - qos 0 - with code 0
+00:32.444	ID:8	       --  id 5 -- topic 2  -- qos 0
+00:32.450	ID:2	client_2 -- Received forwarded PUB from: 7
+00:32.452	ID:1	broker -- forwardPublish 5 to 6 - qos 0 - with code 0
+00:32.452	ID:2	       --  id 5 -- topic 2  -- qos 0
+00:32.453	ID:6	client_6 -- Received forwarded PUB from: 7
+00:32.455	ID:6	       --  id 5 -- topic 2  -- qos 0
+00:32.705	ID:9	client_9 -- Send PUBLISH - msg_id: 5
+00:32.709	ID:9	client_9 --      -- topic 1 -- payload 23383 -- qos 0
+00:32.714	ID:1	broker -- Received PUB - id: 5 _ from: 9 -- topic 1
+00:32.716	ID:1	broker -- Enqueued PUBLISH - id: 5
+00:32.719	ID:5	client_5 -- Send PUBLISH - msg_id: 5
+00:32.721	ID:1	broker -- forwardPublish 5 to 7 - qos 1 - with code 0
+00:32.723	ID:5	client_5 --      -- topic 0 -- payload 27137 -- qos 0
+00:32.728	ID:1	broker -- PUBACK received
+00:32.729	ID:7	client_7 -- Received forwarded PUB from: 9
+00:32.731	ID:7	       --  id 5 -- topic 1  -- qos 1
+00:32.733	ID:1	broker -- forwardPublish 5 to 9 - qos 1 - with code 0
+00:32.737	ID:1	broker -- PUBACK received
+00:32.737	ID:9	client_9 -- Received forwarded PUB from: 9
+00:32.739	ID:9	       --  id 5 -- topic 1  -- qos 1
+00:32.741	ID:1	broker -- forwardPublish 5 to 5 - qos 1 - with code 0
+00:32.747	ID:1	broker -- PUBACK received
+00:32.748	ID:5	client_5 -- Received forwarded PUB from: 9
+00:32.750	ID:5	       --  id 5 -- topic 1  -- qos 1
+00:32.751	ID:1	broker -- forwardPublish 5 to 8 - qos 0 - with code 0
+00:32.758	ID:8	client_8 -- Received forwarded PUB from: 9
+00:32.760	ID:1	broker -- forwardPublish 5 to 4 - qos 0 - with code 0
+00:32.761	ID:8	       --  id 5 -- topic 1  -- qos 0
+00:32.771	ID:4	client_4 -- Received forwarded PUB from: 9
+00:32.773	ID:4	       --  id 5 -- topic 1  -- qos 0
+00:32.889	ID:3	client_3 -- Send PUBLISH - msg_id: 5
+00:32.893	ID:3	client_3 --      -- topic 1 -- payload -3754 -- qos 1
+00:32.893	ID:1	broker -- Received PUB - id: 5 _ from: 3 -- topic 1
+00:32.895	ID:3	client_3 -- PUBACK received
+00:32.895	ID:1	broker -- Enqueued PUBLISH - id: 5
+00:32.900	ID:1	broker -- forwardPublish 5 to 7 - qos 1 - with code 0
+00:32.908	ID:1	broker -- PUBACK received
+00:32.908	ID:7	client_7 -- Received forwarded PUB from: 3
+00:32.911	ID:7	       --  id 5 -- topic 1  -- qos 1
+00:32.912	ID:1	broker -- forwardPublish 5 to 9 - qos 1 - with code 0
+00:32.923	ID:1	broker -- PUBACK received
+00:32.924	ID:9	client_9 -- Received forwarded PUB from: 3
+00:32.926	ID:9	       --  id 5 -- topic 1  -- qos 1
+00:32.927	ID:1	broker -- forwardPublish 5 to 5 - qos 1 - with code 0
+00:32.935	ID:1	broker -- PUBACK received
+00:32.935	ID:5	client_5 -- Received forwarded PUB from: 3
+00:32.938	ID:5	       --  id 5 -- topic 1  -- qos 1
+00:32.939	ID:1	broker -- forwardPublish 5 to 8 - qos 0 - with code 0
+00:32.947	ID:8	client_8 -- Received forwarded PUB from: 3
+00:32.948	ID:1	broker -- forwardPublish 5 to 4 - qos 0 - with code 0
+00:32.949	ID:8	       --  id 5 -- topic 1  -- qos 0
+00:32.959	ID:4	client_4 -- Received forwarded PUB from: 3
+00:32.961	ID:4	       --  id 5 -- topic 1  -- qos 0
+00:36.952	ID:8	client_8 -- Send PUBLISH - msg_id: 5
+00:36.956	ID:8	client_8 --      -- topic 0 -- payload -22797 -- qos 0
+00:36.965	ID:1	broker -- Received PUB - id: 5 _ from: 8 -- topic 0
+00:36.968	ID:1	broker -- Enqueued PUBLISH - id: 5
+00:36.973	ID:1	broker -- forwardPublish 5 to 7 - qos 1 - with code 0
+00:36.975	ID:1	broker -- PUBACK received
+00:36.975	ID:7	client_7 -- Received forwarded PUB from: 8
+00:36.977	ID:7	       --  id 5 -- topic 0  -- qos 1
+00:36.979	ID:1	broker -- forwardPublish 5 to 9 - qos 1 - with code 0
+00:36.985	ID:1	broker -- PUBACK received
+00:36.986	ID:9	client_9 -- Received forwarded PUB from: 8
+00:36.988	ID:9	       --  id 5 -- topic 0  -- qos 1
+00:36.990	ID:1	broker -- forwardPublish 5 to 3 - qos 1 - with code 0
+00:36.997	ID:1	broker -- PUBACK received
+00:36.998	ID:3	client_3 -- Received forwarded PUB from: 8
+00:37.000	ID:3	       --  id 5 -- topic 0  -- qos 1
+00:37.002	ID:1	broker -- forwardPublish 5 to 6 - qos 0 - with code 0
+00:37.011	ID:6	client_6 -- Received forwarded PUB from: 8
+00:37.013	ID:6	       --  id 5 -- topic 0  -- qos 0
+00:37.112	ID:2	client_2 -- Send PUBLISH - msg_id: 5
+00:37.116	ID:2	client_2 --      -- topic 0 -- payload 14246 -- qos 0
+00:37.117	ID:1	broker -- Received PUB - id: 5 _ from: 2 -- topic 0
+00:37.119	ID:1	broker -- Enqueued PUBLISH - id: 5
+00:37.123	ID:1	broker -- forwardPublish 5 to 7 - qos 1 - with code 0
+00:37.130	ID:1	broker -- PUBACK received
+00:37.131	ID:7	client_7 -- Received forwarded PUB from: 2
+00:37.133	ID:7	       --  id 5 -- topic 0  -- qos 1
+00:37.136	ID:1	broker -- forwardPublish 5 to 9 - qos 1 - with code 0
+00:37.136	ID:6	client_6 -- Send PUBLISH - msg_id: 5
+00:37.137	ID:9	client_9 -- Received forwarded PUB from: 2
+00:37.137	ID:1	broker -- PUBACK received
+00:37.139	ID:9	       --  id 5 -- topic 0  -- qos 1
+00:37.141	ID:6	client_6 --      -- topic 1 -- payload -32295 -- qos 0
+00:37.142	ID:1	broker -- forwardPublish 5 to 3 - qos 1 - with code 0
+00:37.152	ID:1	broker -- PUBACK received
+00:37.153	ID:3	client_3 -- Received forwarded PUB from: 2
+00:37.155	ID:3	       --  id 5 -- topic 0  -- qos 1
+00:37.156	ID:1	broker -- forwardPublish 5 to 6 - qos 0 - with code 0
+00:37.166	ID:6	client_6 -- Received forwarded PUB from: 2
+00:37.169	ID:6	       --  id 5 -- topic 0  -- qos 0
+00:37.234	ID:4	client_4 -- Send PUBLISH - msg_id: 5
+00:37.237	ID:4	client_4 --      -- topic 2 -- payload 23744 -- qos 0
+00:37.243	ID:1	broker -- Received PUB - id: 5 _ from: 4 -- topic 2
+00:37.245	ID:1	broker -- Enqueued PUBLISH - id: 5
+00:37.250	ID:1	broker -- forwardPublish 5 to 9 - qos 1 - with code 0
+00:37.258	ID:1	broker -- PUBACK received
+00:37.259	ID:9	client_9 -- Received forwarded PUB from: 4
+00:37.261	ID:9	       --  id 5 -- topic 2  -- qos 1
+00:37.263	ID:1	broker -- forwardPublish 5 to 5 - qos 1 - with code 0
+00:37.266	ID:1	broker -- PUBACK received
+00:37.266	ID:5	client_5 -- Received forwarded PUB from: 4
+00:37.268	ID:5	       --  id 5 -- topic 2  -- qos 1
+00:37.270	ID:1	broker -- forwardPublish 5 to 8 - qos 0 - with code 0
+00:37.281	ID:8	client_8 -- Received forwarded PUB from: 4
+00:37.283	ID:1	broker -- forwardPublish 5 to 2 - qos 0 - with code 0
+00:37.283	ID:8	       --  id 5 -- topic 2  -- qos 0
+00:37.286	ID:2	client_2 -- Received forwarded PUB from: 4
+00:37.288	ID:1	broker -- forwardPublish 5 to 6 - qos 0 - with code 0
+00:37.288	ID:2	       --  id 5 -- topic 2  -- qos 0
+00:37.294	ID:6	client_6 -- Received forwarded PUB from: 4
+00:37.296	ID:6	       --  id 5 -- topic 2  -- qos 0
+00:39.248	ID:7	client_7 -- Send PUBLISH - msg_id: 6
+00:39.252	ID:7	client_7 --      -- topic 2 -- payload -23144 -- qos 0
+00:39.259	ID:1	broker -- Received PUB - id: 6 _ from: 7 -- topic 2
+00:39.261	ID:1	broker -- Enqueued PUBLISH - id: 6
+00:39.267	ID:1	broker -- forwardPublish 6 to 9 - qos 1 - with code 0
+00:39.268	ID:9	client_9 -- Received forwarded PUB from: 7
+00:39.268	ID:1	broker -- PUBACK received
+00:39.270	ID:9	       --  id 6 -- topic 2  -- qos 1
+00:39.274	ID:1	broker -- forwardPublish 6 to 5 - qos 1 - with code 0
+00:39.275	ID:1	broker -- PUBACK received
+00:39.276	ID:5	client_5 -- Received forwarded PUB from: 7
+00:39.278	ID:5	       --  id 6 -- topic 2  -- qos 1
+00:39.280	ID:1	broker -- forwardPublish 6 to 8 - qos 0 - with code 0
+00:39.282	ID:8	client_8 -- Received forwarded PUB from: 7
+00:39.284	ID:8	       --  id 6 -- topic 2  -- qos 0
+00:39.285	ID:1	broker -- forwardPublish 6 to 2 - qos 0 - with code 0
+00:39.294	ID:2	client_2 -- Received forwarded PUB from: 7
+00:39.295	ID:1	broker -- forwardPublish 6 to 6 - qos 0 - with code 0
+00:39.296	ID:2	       --  id 6 -- topic 2  -- qos 0
+00:39.306	ID:6	client_6 -- Received forwarded PUB from: 7
+00:39.308	ID:6	       --  id 6 -- topic 2  -- qos 0
+00:39.550	ID:9	client_9 -- Send PUBLISH - msg_id: 6
+00:39.553	ID:9	client_9 --      -- topic 1 -- payload 20222 -- qos 1
+00:39.559	ID:9	client_9 -- PUBACK received
+00:39.560	ID:1	broker -- Received PUB - id: 6 _ from: 9 -- topic 1
+00:39.562	ID:1	broker -- Enqueued PUBLISH - id: 6
+00:39.562	ID:5	client_5 -- Send PUBLISH - msg_id: 6
+00:39.566	ID:5	client_5 --      -- topic 0 -- payload -974 -- qos 1
+00:39.567	ID:1	broker -- forwardPublish 6 to 7 - qos 1 - with code 0
+00:39.570	ID:5	client_5 -- PUBACK received
+00:39.577	ID:1	broker -- PUBACK received
+00:39.578	ID:7	client_7 -- Received forwarded PUB from: 9
+00:39.580	ID:7	       --  id 6 -- topic 1  -- qos 1
+00:39.583	ID:1	broker -- forwardPublish 6 to 9 - qos 1 - with code 0
+00:39.584	ID:1	broker -- PUBACK received
+00:39.585	ID:9	client_9 -- Received forwarded PUB from: 9
+00:39.587	ID:9	       --  id 6 -- topic 1  -- qos 1
+00:39.589	ID:1	broker -- forwardPublish 6 to 5 - qos 1 - with code 0
+00:39.593	ID:1	broker -- PUBACK received
+00:39.594	ID:5	client_5 -- Received forwarded PUB from: 9
+00:39.596	ID:5	       --  id 6 -- topic 1  -- qos 1
+00:39.597	ID:1	broker -- forwardPublish 6 to 8 - qos 0 - with code 0
+00:39.603	ID:8	client_8 -- Received forwarded PUB from: 9
+00:39.605	ID:1	broker -- forwardPublish 6 to 4 - qos 0 - with code 0
+00:39.605	ID:8	       --  id 6 -- topic 1  -- qos 0
+00:39.608	ID:4	client_4 -- Received forwarded PUB from: 9
+00:39.610	ID:4	       --  id 6 -- topic 1  -- qos 0
+00:39.734	ID:3	client_3 -- Send PUBLISH - msg_id: 6
+00:39.737	ID:3	client_3 --      -- topic 1 -- payload 21196 -- qos 0
+00:39.743	ID:1	broker -- Received PUB - id: 6 _ from: 3 -- topic 1
+00:39.745	ID:1	broker -- Enqueued PUBLISH - id: 6
+00:39.750	ID:1	broker -- forwardPublish 6 to 7 - qos 1 - with code 0
+00:39.759	ID:1	broker -- PUBACK received
+00:39.759	ID:7	client_7 -- Received forwarded PUB from: 3
+00:39.762	ID:7	       --  id 6 -- topic 1  -- qos 1
+00:39.764	ID:1	broker -- forwardPublish 6 to 9 - qos 1 - with code 0
+00:39.766	ID:1	broker -- PUBACK received
+00:39.767	ID:9	client_9 -- Received forwarded PUB from: 3
+00:39.769	ID:9	       --  id 6 -- topic 1  -- qos 1
+00:39.772	ID:1	broker -- forwardPublish 6 to 5 - qos 1 - with code 0
+00:39.773	ID:1	broker -- PUBACK received
+00:39.773	ID:5	client_5 -- Received forwarded PUB from: 3
+00:39.775	ID:5	       --  id 6 -- topic 1  -- qos 1
+00:39.777	ID:1	broker -- forwardPublish 6 to 8 - qos 0 - with code 0
+00:39.785	ID:8	client_8 -- Received forwarded PUB from: 3
+00:39.786	ID:1	broker -- forwardPublish 6 to 4 - qos 0 - with code 0
+00:39.787	ID:8	       --  id 6 -- topic 1  -- qos 0
+00:39.797	ID:4	client_4 -- Received forwarded PUB from: 3
+00:39.799	ID:4	       --  id 6 -- topic 1  -- qos 0
+00:43.801	ID:8	client_8 -- Send PUBLISH - msg_id: 6
+00:43.804	ID:8	client_8 --      -- topic 0 -- payload -3709 -- qos 1
+00:43.812	ID:8	client_8 -- PUBACK received
+00:43.812	ID:1	broker -- Received PUB - id: 6 _ from: 8 -- topic 0
+00:43.814	ID:1	broker -- Enqueued PUBLISH - id: 6
+00:43.819	ID:1	broker -- forwardPublish 6 to 7 - qos 1 - with code 0
+00:43.828	ID:1	broker -- PUBACK received
+00:43.829	ID:7	client_7 -- Received forwarded PUB from: 8
+00:43.831	ID:7	       --  id 6 -- topic 0  -- qos 1
+00:43.832	ID:1	broker -- forwardPublish 6 to 9 - qos 1 - with code 0
+00:43.837	ID:1	broker -- PUBACK received
+00:43.838	ID:9	client_9 -- Received forwarded PUB from: 8
+00:43.840	ID:9	       --  id 6 -- topic 0  -- qos 1
+00:43.842	ID:1	broker -- forwardPublish 6 to 3 - qos 1 - with code 0
+00:43.849	ID:1	broker -- PUBACK received
+00:43.850	ID:3	client_3 -- Received forwarded PUB from: 8
+00:43.852	ID:3	       --  id 6 -- topic 0  -- qos 1
+00:43.854	ID:1	broker -- forwardPublish 6 to 6 - qos 0 - with code 0
+00:43.862	ID:6	client_6 -- Received forwarded PUB from: 8
+00:43.864	ID:6	       --  id 6 -- topic 0  -- qos 0
+00:43.956	ID:2	client_2 -- Send PUBLISH - msg_id: 6
+00:43.960	ID:2	client_2 --      -- topic 0 -- payload -23082 -- qos 1
+00:43.961	ID:1	broker -- Received PUB - id: 6 _ from: 2 -- topic 0
+00:43.962	ID:2	client_2 -- PUBACK received
+00:43.963	ID:1	broker -- Enqueued PUBLISH - id: 6
+00:43.968	ID:1	broker -- forwardPublish 6 to 7 - qos 1 - with code 0
+00:43.972	ID:1	broker -- PUBACK received
+00:43.972	ID:7	client_7 -- Received forwarded PUB from: 2
+00:43.974	ID:7	       --  id 6 -- topic 0  -- qos 1
+00:43.976	ID:1	broker -- forwardPublish 6 to 9 - qos 1 - with code 0
+00:43.982	ID:1	broker -- PUBACK received
+00:43.982	ID:6	client_6 -- Send PUBLISH - msg_id: 6
+00:43.982	ID:9	client_9 -- Received forwarded PUB from: 2
+00:43.984	ID:9	       --  id 6 -- topic 0  -- qos 1
+00:43.986	ID:6	client_6 --      -- topic 1 -- payload -32012 -- qos 1
+00:43.987	ID:1	broker -- forwardPublish 6 to 3 - qos 1 - with code 0
+00:43.989	ID:1	broker -- PUBACK received
+00:43.990	ID:3	client_3 -- Received forwarded PUB from: 2
+00:43.992	ID:3	       --  id 6 -- topic 0  -- qos 1
+00:43.992	ID:6	client_6 -- PUBACK received
+00:43.995	ID:1	broker -- forwardPublish 6 to 6 - qos 0 - with code 0
+00:44.003	ID:6	client_6 -- Received forwarded PUB from: 2
+00:44.005	ID:6	       --  id 6 -- topic 0  -- qos 0
+00:44.079	ID:4	client_4 -- Send PUBLISH - msg_id: 6
+00:44.083	ID:4	client_4 --      -- topic 2 -- payload 5221 -- qos 0
+00:44.085	ID:1	broker -- Received PUB - id: 6 _ from: 4 -- topic 2
+00:44.087	ID:1	broker -- Enqueued PUBLISH - id: 6
+00:44.091	ID:1	broker -- forwardPublish 6 to 9 - qos 1 - with code 0
+00:44.097	ID:1	broker -- PUBACK received
+00:44.098	ID:9	client_9 -- Received forwarded PUB from: 4
+00:44.100	ID:9	       --  id 6 -- topic 2  -- qos 1
+00:44.101	ID:1	broker -- forwardPublish 6 to 5 - qos 1 - with code 0
+00:44.108	ID:1	broker -- PUBACK received
+00:44.109	ID:5	client_5 -- Received forwarded PUB from: 4
+00:44.111	ID:5	       --  id 6 -- topic 2  -- qos 1
+00:44.113	ID:1	broker -- forwardPublish 6 to 8 - qos 0 - with code 0
+00:44.117	ID:8	client_8 -- Received forwarded PUB from: 4
+00:44.118	ID:1	broker -- forwardPublish 6 to 2 - qos 0 - with code 0
+00:44.119	ID:8	       --  id 6 -- topic 2  -- qos 0
+00:44.123	ID:2	client_2 -- Received forwarded PUB from: 4
+00:44.125	ID:1	broker -- forwardPublish 6 to 6 - qos 0 - with code 0
+00:44.125	ID:2	       --  id 6 -- topic 2  -- qos 0
+00:44.128	ID:6	client_6 -- Received forwarded PUB from: 4
+00:44.130	ID:6	       --  id 6 -- topic 2  -- qos 0
+00:46.095	ID:7	client_7 -- Send PUBLISH - msg_id: 7
+00:46.098	ID:7	client_7 --      -- topic 2 -- payload 2184 -- qos 1
+00:46.104	ID:7	client_7 -- PUBACK received
+00:46.105	ID:1	broker -- Received PUB - id: 7 _ from: 7 -- topic 2
+00:46.107	ID:1	broker -- Enqueued PUBLISH - id: 7
+00:46.111	ID:1	broker -- forwardPublish 7 to 9 - qos 1 - with code 0
+00:46.122	ID:1	broker -- PUBACK received
+00:46.123	ID:9	client_9 -- Received forwarded PUB from: 7
+00:46.125	ID:9	       --  id 7 -- topic 2  -- qos 1
+00:46.128	ID:1	broker -- forwardPublish 7 to 5 - qos 1 - with code 0
+00:46.129	ID:5	client_5 -- Received forwarded PUB from: 7
+00:46.129	ID:1	broker -- PUBACK received
+00:46.131	ID:5	       --  id 7 -- topic 2  -- qos 1
+00:46.133	ID:1	broker -- forwardPublish 7 to 8 - qos 0 - with code 0
+00:46.138	ID:8	client_8 -- Received forwarded PUB from: 7
+00:46.140	ID:1	broker -- forwardPublish 7 to 2 - qos 0 - with code 0
+00:46.140	ID:8	       --  id 7 -- topic 2  -- qos 0
+00:46.150	ID:2	client_2 -- Received forwarded PUB from: 7
+00:46.151	ID:1	broker -- forwardPublish 7 to 6 - qos 0 - with code 0
+00:46.152	ID:2	       --  id 7 -- topic 2  -- qos 0
+00:46.156	ID:6	client_6 -- Received forwarded PUB from: 7
+00:46.158	ID:6	       --  id 7 -- topic 2  -- qos 0
+00:46.399	ID:9	client_9 -- Send PUBLISH - msg_id: 7
+00:46.402	ID:9	client_9 --      -- topic 1 -- payload -30038 -- qos 1
+00:46.409	ID:9	client_9 -- PUBACK received
+00:46.410	ID:1	broker -- Received PUB - id: 7 _ from: 9 -- topic 1
+00:46.410	ID:5	client_5 -- Send PUBLISH - msg_id: 7
+00:46.412	ID:1	broker -- Enqueued PUBLISH - id: 7
+00:46.414	ID:5	client_5 --      -- topic 0 -- payload -31130 -- qos 0
+00:46.416	ID:1	broker -- forwardPublish 7 to 7 - qos 1 - with code 0
+00:46.424	ID:1	broker -- PUBACK received
+00:46.425	ID:7	client_7 -- Received forwarded PUB from: 9
+00:46.427	ID:7	       --  id 7 -- topic 1  -- qos 1
+00:46.428	ID:1	broker -- forwardPublish 7 to 9 - qos 1 - with code 0
+00:46.439	ID:1	broker -- PUBACK received
+00:46.440	ID:9	client_9 -- Received forwarded PUB from: 9
+00:46.442	ID:9	       --  id 7 -- topic 1  -- qos 1
+00:46.444	ID:1	broker -- forwardPublish 7 to 5 - qos 1 - with code 0
+00:46.450	ID:1	broker -- PUBACK received
+00:46.451	ID:5	client_5 -- Received forwarded PUB from: 9
+00:46.453	ID:5	       --  id 7 -- topic 1  -- qos 1
+00:46.455	ID:1	broker -- forwardPublish 7 to 8 - qos 0 - with code 0
+00:46.458	ID:8	client_8 -- Received forwarded PUB from: 9
+00:46.459	ID:1	broker -- forwardPublish 7 to 4 - qos 0 - with code 0
+00:46.460	ID:8	       --  id 7 -- topic 1  -- qos 0
+00:46.467	ID:4	client_4 -- Received forwarded PUB from: 9
+00:46.469	ID:4	       --  id 7 -- topic 1  -- qos 0
+00:46.579	ID:3	client_3 -- Send PUBLISH - msg_id: 7
+00:46.582	ID:3	client_3 --      -- topic 1 -- payload 1092 -- qos 1
+00:46.590	ID:3	client_3 -- PUBACK received
+00:46.590	ID:1	broker -- Received PUB - id: 7 _ from: 3 -- topic 1
+00:46.593	ID:1	broker -- Enqueued PUBLISH - id: 7
+00:46.597	ID:1	broker -- forwardPublish 7 to 7 - qos 1 - with code 0
+00:46.607	ID:1	broker -- PUBACK received
+00:46.607	ID:7	client_7 -- Received forwarded PUB from: 3
+00:46.609	ID:7	       --  id 7 -- topic 1  -- qos 1
+00:46.611	ID:1	broker -- forwardPublish 7 to 9 - qos 1 - with code 0
+00:46.621	ID:1	broker -- PUBACK received
+00:46.622	ID:9	client_9 -- Received forwarded PUB from: 3
+00:46.624	ID:9	       --  id 7 -- topic 1  -- qos 1
+00:46.625	ID:1	broker -- forwardPublish 7 to 5 - qos 1 - with code 0
+00:46.634	ID:1	broker -- PUBACK received
+00:46.635	ID:5	client_5 -- Received forwarded PUB from: 3
+00:46.637	ID:5	       --  id 7 -- topic 1  -- qos 1
+00:46.639	ID:1	broker -- forwardPublish 7 to 8 - qos 0 - with code 0
+00:46.642	ID:8	client_8 -- Received forwarded PUB from: 3
+00:46.644	ID:1	broker -- forwardPublish 7 to 4 - qos 0 - with code 0
+00:46.644	ID:8	       --  id 7 -- topic 1  -- qos 0
+00:46.655	ID:4	client_4 -- Received forwarded PUB from: 3
+00:46.657	ID:4	       --  id 7 -- topic 1  -- qos 0
+00:50.651	ID:8	client_8 -- Send PUBLISH - msg_id: 7
+00:50.654	ID:8	client_8 --      -- topic 0 -- payload -8101 -- qos 0
+00:50.662	ID:1	broker -- Received PUB - id: 7 _ from: 8 -- topic 0
+00:50.664	ID:1	broker -- Enqueued PUBLISH - id: 7
+00:50.669	ID:1	broker -- forwardPublish 7 to 7 - qos 1 - with code 0
+00:50.677	ID:1	broker -- PUBACK received
+00:50.678	ID:7	client_7 -- Received forwarded PUB from: 8
+00:50.680	ID:7	       --  id 7 -- topic 0  -- qos 1
+00:50.682	ID:1	broker -- forwardPublish 7 to 9 - qos 1 - with code 0
+00:50.688	ID:1	broker -- PUBACK received
+00:50.689	ID:9	client_9 -- Received forwarded PUB from: 8
+00:50.691	ID:9	       --  id 7 -- topic 0  -- qos 1
+00:50.693	ID:1	broker -- forwardPublish 7 to 3 - qos 1 - with code 0
+00:50.701	ID:1	broker -- PUBACK received
+00:50.701	ID:3	client_3 -- Received forwarded PUB from: 8
+00:50.703	ID:3	       --  id 7 -- topic 0  -- qos 1
+00:50.705	ID:1	broker -- forwardPublish 7 to 6 - qos 0 - with code 0
+00:50.710	ID:6	client_6 -- Received forwarded PUB from: 8
+00:50.712	ID:6	       --  id 7 -- topic 0  -- qos 0
+00:50.801	ID:2	client_2 -- Send PUBLISH - msg_id: 7
+00:50.805	ID:2	client_2 --      -- topic 0 -- payload 19145 -- qos 0
+00:50.809	ID:1	broker -- Received PUB - id: 7 _ from: 2 -- topic 0
+00:50.811	ID:1	broker -- Enqueued PUBLISH - id: 7
+00:50.816	ID:1	broker -- forwardPublish 7 to 7 - qos 1 - with code 0
+00:50.818	ID:1	broker -- PUBACK received
+00:50.819	ID:7	client_7 -- Received forwarded PUB from: 2
+00:50.821	ID:7	       --  id 7 -- topic 0  -- qos 1
+00:50.823	ID:1	broker -- forwardPublish 7 to 9 - qos 1 - with code 0
+00:50.832	ID:1	broker -- PUBACK received
+00:50.833	ID:6	client_6 -- Send PUBLISH - msg_id: 7
+00:50.833	ID:9	client_9 -- Received forwarded PUB from: 2
+00:50.835	ID:9	       --  id 7 -- topic 0  -- qos 1
+00:50.837	ID:6	client_6 --      -- topic 1 -- payload 22826 -- qos 0
+00:50.838	ID:1	broker -- forwardPublish 7 to 3 - qos 1 - with code 0
+00:50.839	ID:3	client_3 -- Received forwarded PUB from: 2
+00:50.839	ID:1	broker -- PUBACK received
+00:50.842	ID:3	       --  id 7 -- topic 0  -- qos 1
+00:50.845	ID:1	broker -- forwardPublish 7 to 6 - qos 0 - with code 0
+00:50.847	ID:6	client_6 -- Received forwarded PUB from: 2
+00:50.849	ID:6	       --  id 7 -- topic 0  -- qos 0
+00:50.922	ID:4	client_4 -- Send PUBLISH - msg_id: 7
+00:50.926	ID:4	client_4 --      -- topic 2 -- payload -11783 -- qos 0
+00:50.933	ID:1	broker -- Received PUB - id: 7 _ from: 4 -- topic 2
+00:50.935	ID:1	broker -- Enqueued PUBLISH - id: 7
+00:50.939	ID:1	broker -- forwardPublish 7 to 9 - qos 1 - with code 0
+00:50.945	ID:1	broker -- PUBACK received
+00:50.946	ID:9	client_9 -- Received forwarded PUB from: 4
+00:50.948	ID:9	       --  id 7 -- topic 2  -- qos 1
+00:50.950	ID:1	broker -- forwardPublish 7 to 5 - qos 1 - with code 0
+00:50.960	ID:1	broker -- PUBACK received
+00:50.960	ID:5	client_5 -- Received forwarded PUB from: 4
+00:50.962	ID:5	       --  id 7 -- topic 2  -- qos 1
+00:50.964	ID:1	broker -- forwardPublish 7 to 8 - qos 0 - with code 0
+00:50.971	ID:8	client_8 -- Received forwarded PUB from: 4
+00:50.972	ID:1	broker -- forwardPublish 7 to 2 - qos 0 - with code 0
+00:50.973	ID:8	       --  id 7 -- topic 2  -- qos 0
+00:50.980	ID:2	client_2 -- Received forwarded PUB from: 4
+00:50.982	ID:1	broker -- forwardPublish 7 to 6 - qos 0 - with code 0
+00:50.983	ID:2	       --  id 7 -- topic 2  -- qos 0
+00:50.989	ID:6	client_6 -- Received forwarded PUB from: 4
+00:50.991	ID:6	       --  id 7 -- topic 2  -- qos 0
+00:52.943	ID:7	client_7 -- Send PUBLISH - msg_id: 8
+00:52.947	ID:7	client_7 --      -- topic 2 -- payload 29051 -- qos 1
+00:52.952	ID:7	client_7 -- PUBACK received
+00:52.952	ID:1	broker -- Received PUB - id: 8 _ from: 7 -- topic 2
+00:52.954	ID:1	broker -- Enqueued PUBLISH - id: 8
+00:52.959	ID:1	broker -- forwardPublish 8 to 9 - qos 1 - with code 0
+00:52.965	ID:1	broker -- PUBACK received
+00:52.966	ID:9	client_9 -- Received forwarded PUB from: 7
+00:52.968	ID:9	       --  id 8 -- topic 2  -- qos 1
+00:52.969	ID:1	broker -- forwardPublish 8 to 5 - qos 1 - with code 0
+00:52.979	ID:1	broker -- PUBACK received
+00:52.980	ID:5	client_5 -- Received forwarded PUB from: 7
+00:52.982	ID:5	       --  id 8 -- topic 2  -- qos 1
+00:52.983	ID:1	broker -- forwardPublish 8 to 8 - qos 0 - with code 0
+00:52.991	ID:8	client_8 -- Received forwarded PUB from: 7
+00:52.992	ID:1	broker -- forwardPublish 8 to 2 - qos 0 - with code 0
+00:52.993	ID:8	       --  id 8 -- topic 2  -- qos 0
+00:52.999	ID:2	client_2 -- Received forwarded PUB from: 7
+00:53.001	ID:1	broker -- forwardPublish 8 to 6 - qos 0 - with code 0
+00:53.001	ID:2	       --  id 8 -- topic 2  -- qos 0
+00:53.010	ID:6	client_6 -- Received forwarded PUB from: 7
+00:53.012	ID:6	       --  id 8 -- topic 2  -- qos 0
+00:53.249	ID:9	client_9 -- Send PUBLISH - msg_id: 8
+00:53.252	ID:9	client_9 --      -- topic 1 -- payload -12838 -- qos 0
+00:53.253	ID:1	broker -- Received PUB - id: 8 _ from: 9 -- topic 1
+00:53.255	ID:1	broker -- Enqueued PUBLISH - id: 8
+00:53.258	ID:5	client_5 -- Send PUBLISH - msg_id: 8
+00:53.261	ID:1	broker -- forwardPublish 8 to 7 - qos 1 - with code 0
+00:53.262	ID:5	client_5 --      -- topic 0 -- payload 5404 -- qos 0
+00:53.263	ID:1	broker -- PUBACK received
+00:53.263	ID:7	client_7 -- Received forwarded PUB from: 9
+00:53.266	ID:7	       --  id 8 -- topic 1  -- qos 1
+00:53.269	ID:1	broker -- forwardPublish 8 to 9 - qos 1 - with code 0
+00:53.272	ID:1	broker -- PUBACK received
+00:53.272	ID:9	client_9 -- Received forwarded PUB from: 9
+00:53.274	ID:9	       --  id 8 -- topic 1  -- qos 1
+00:53.276	ID:1	broker -- forwardPublish 8 to 5 - qos 1 - with code 0
+00:53.283	ID:1	broker -- PUBACK received
+00:53.283	ID:5	client_5 -- Received forwarded PUB from: 9
+00:53.285	ID:5	       --  id 8 -- topic 1  -- qos 1
+00:53.287	ID:1	broker -- forwardPublish 8 to 8 - qos 0 - with code 0
+00:53.297	ID:8	client_8 -- Received forwarded PUB from: 9
+00:53.299	ID:1	broker -- forwardPublish 8 to 4 - qos 0 - with code 0
+00:53.299	ID:8	       --  id 8 -- topic 1  -- qos 0
+00:53.301	ID:4	client_4 -- Received forwarded PUB from: 9
+00:53.303	ID:4	       --  id 8 -- topic 1  -- qos 0
+00:53.428	ID:3	client_3 -- Send PUBLISH - msg_id: 8
+00:53.433	ID:3	client_3 --      -- topic 1 -- payload -18243 -- qos 0
+00:53.435	ID:1	broker -- Received PUB - id: 8 _ from: 3 -- topic 1
+00:53.437	ID:1	broker -- Enqueued PUBLISH - id: 8
+00:53.441	ID:1	broker -- forwardPublish 8 to 7 - qos 1 - with code 0
+00:53.450	ID:1	broker -- PUBACK received
+00:53.451	ID:7	client_7 -- Received forwarded PUB from: 3
+00:53.453	ID:7	       --  id 8 -- topic 1  -- qos 1
+00:53.455	ID:1	broker -- forwardPublish 8 to 9 - qos 1 - with code 0
+00:53.462	ID:1	broker -- PUBACK received
+00:53.462	ID:9	client_9 -- Received forwarded PUB from: 3
+00:53.464	ID:9	       --  id 8 -- topic 1  -- qos 1
+00:53.466	ID:1	broker -- forwardPublish 8 to 5 - qos 1 - with code 0
+00:53.477	ID:1	broker -- PUBACK received
+00:53.478	ID:5	client_5 -- Received forwarded PUB from: 3
+00:53.480	ID:5	       --  id 8 -- topic 1  -- qos 1
+00:53.481	ID:1	broker -- forwardPublish 8 to 8 - qos 0 - with code 0
+00:53.488	ID:8	client_8 -- Received forwarded PUB from: 3
+00:53.490	ID:1	broker -- forwardPublish 8 to 4 - qos 0 - with code 0
+00:53.491	ID:8	       --  id 8 -- topic 1  -- qos 0
+00:53.496	ID:4	client_4 -- Received forwarded PUB from: 3
+00:53.498	ID:4	       --  id 8 -- topic 1  -- qos 0
+00:57.498	ID:8	client_8 -- Send PUBLISH - msg_id: 8
+00:57.502	ID:8	client_8 --      -- topic 0 -- payload -31841 -- qos 0
+00:57.508	ID:1	broker -- Received PUB - id: 8 _ from: 8 -- topic 0
+00:57.510	ID:1	broker -- Enqueued PUBLISH - id: 8
+00:57.514	ID:1	broker -- forwardPublish 8 to 7 - qos 1 - with code 0
+00:57.525	ID:1	broker -- PUBACK received
+00:57.526	ID:7	client_7 -- Received forwarded PUB from: 8
+00:57.528	ID:7	       --  id 8 -- topic 0  -- qos 1
+00:57.529	ID:1	broker -- forwardPublish 8 to 9 - qos 1 - with code 0
+00:57.534	ID:1	broker -- PUBACK received
+00:57.535	ID:9	client_9 -- Received forwarded PUB from: 8
+00:57.537	ID:9	       --  id 8 -- topic 0  -- qos 1
+00:57.539	ID:1	broker -- forwardPublish 8 to 3 - qos 1 - with code 0
+00:57.542	ID:1	broker -- PUBACK received
+00:57.543	ID:3	client_3 -- Received forwarded PUB from: 8
+00:57.545	ID:3	       --  id 8 -- topic 0  -- qos 1
+00:57.546	ID:1	broker -- forwardPublish 8 to 6 - qos 0 - with code 0
+00:57.556	ID:6	client_6 -- Received forwarded PUB from: 8
+00:57.558	ID:6	       --  id 8 -- topic 0  -- qos 0
+00:57.646	ID:2	client_2 -- Send PUBLISH - msg_id: 8
+00:57.649	ID:1	broker -- Received PUB - id: 8 _ from: 2 -- topic 0
+00:57.649	ID:2	client_2 --      -- topic 0 -- payload -32459 -- qos 0
+00:57.651	ID:1	broker -- Enqueued PUBLISH - id: 8
+00:57.655	ID:1	broker -- forwardPublish 8 to 7 - qos 1 - with code 0
+00:57.662	ID:1	broker -- PUBACK received
+00:57.663	ID:7	client_7 -- Received forwarded PUB from: 2
+00:57.665	ID:7	       --  id 8 -- topic 0  -- qos 1
+00:57.667	ID:1	broker -- forwardPublish 8 to 9 - qos 1 - with code 0
+00:57.670	ID:1	broker -- PUBACK received
+00:57.671	ID:9	client_9 -- Received forwarded PUB from: 2
+00:57.673	ID:9	       --  id 8 -- topic 0  -- qos 1
+00:57.674	ID:1	broker -- forwardPublish 8 to 3 - qos 1 - with code 0
+00:57.680	ID:6	client_6 -- Send PUBLISH - msg_id: 8
+00:57.685	ID:3	client_3 -- Received forwarded PUB from: 2
+00:57.685	ID:1	broker -- PUBACK received
+00:57.686	ID:6	client_6 --      -- topic 1 -- payload -13015 -- qos 1
+00:57.687	ID:3	       --  id 8 -- topic 0  -- qos 1
+00:57.689	ID:6	client_6 -- PUBACK received
+00:57.690	ID:1	broker -- forwardPublish 8 to 6 - qos 0 - with code 0
+00:57.694	ID:6	client_6 -- Received forwarded PUB from: 2
+00:57.696	ID:6	       --  id 8 -- topic 0  -- qos 0
+00:57.768	ID:4	client_4 -- Send PUBLISH - msg_id: 8
+00:57.773	ID:4	client_4 --      -- topic 2 -- payload -10408 -- qos 1
+00:57.774	ID:1	broker -- Received PUB - id: 8 _ from: 4 -- topic 2
+00:57.775	ID:4	client_4 -- PUBACK received
+00:57.776	ID:1	broker -- Enqueued PUBLISH - id: 8
+00:57.781	ID:1	broker -- forwardPublish 8 to 9 - qos 1 - with code 0
+00:57.785	ID:1	broker -- PUBACK received
+00:57.785	ID:9	client_9 -- Received forwarded PUB from: 4
+00:57.787	ID:9	       --  id 8 -- topic 2  -- qos 1
+00:57.789	ID:1	broker -- forwardPublish 8 to 5 - qos 1 - with code 0
+00:57.800	ID:1	broker -- PUBACK received
+00:57.800	ID:5	client_5 -- Received forwarded PUB from: 4
+00:57.803	ID:5	       --  id 8 -- topic 2  -- qos 1
+00:57.805	ID:1	broker -- forwardPublish 8 to 8 - qos 0 - with code 0
+00:57.807	ID:8	client_8 -- Received forwarded PUB from: 4
+00:57.809	ID:8	       --  id 8 -- topic 2  -- qos 0
+00:57.810	ID:1	broker -- forwardPublish 8 to 2 - qos 0 - with code 0
+00:57.812	ID:2	client_2 -- Received forwarded PUB from: 4
+00:57.814	ID:2	       --  id 8 -- topic 2  -- qos 0
+00:57.815	ID:1	broker -- forwardPublish 8 to 6 - qos 0 - with code 0
+00:57.821	ID:6	client_6 -- Received forwarded PUB from: 4
+00:57.823	ID:6	       --  id 8 -- topic 2  -- qos 0
+00:59.790	ID:7	client_7 -- Send PUBLISH - msg_id: 9
+00:59.793	ID:7	client_7 --      -- topic 2 -- payload 22575 -- qos 0
+00:59.803	ID:1	broker -- Received PUB - id: 9 _ from: 7 -- topic 2
+00:59.805	ID:1	broker -- Enqueued PUBLISH - id: 9
+00:59.811	ID:1	broker -- forwardPublish 9 to 9 - qos 1 - with code 0
+00:59.812	ID:9	client_9 -- Received forwarded PUB from: 7
+00:59.812	ID:1	broker -- PUBACK received
+00:59.814	ID:9	       --  id 9 -- topic 2  -- qos 1
+00:59.816	ID:1	broker -- forwardPublish 9 to 5 - qos 1 - with code 0
+00:59.822	ID:1	broker -- PUBACK received
+00:59.822	ID:5	client_5 -- Received forwarded PUB from: 7
+00:59.824	ID:5	       --  id 9 -- topic 2  -- qos 1
+00:59.826	ID:1	broker -- forwardPublish 9 to 8 - qos 0 - with code 0
+00:59.833	ID:8	client_8 -- Received forwarded PUB from: 7
+00:59.834	ID:1	broker -- forwardPublish 9 to 2 - qos 0 - with code 0
+00:59.835	ID:8	       --  id 9 -- topic 2  -- qos 0
+00:59.845	ID:2	client_2 -- Received forwarded PUB from: 7
+00:59.846	ID:1	broker -- forwardPublish 9 to 6 - qos 0 - with code 0
+00:59.847	ID:2	       --  id 9 -- topic 2  -- qos 0
+00:59.852	ID:6	client_6 -- Received forwarded PUB from: 7
+00:59.854	ID:6	       --  id 9 -- topic 2  -- qos 0
+01:00.092	ID:9	client_9 -- Send PUBLISH - msg_id: 9
+01:00.095	ID:9	client_9 --      -- topic 1 -- payload 28219 -- qos 0
+01:00.102	ID:1	broker -- Received PUB - id: 9 _ from: 9 -- topic 1
+01:00.104	ID:1	broker -- Enqueued PUBLISH - id: 9
+01:00.105	ID:5	client_5 -- Send PUBLISH - msg_id: 9
+01:00.109	ID:1	broker -- forwardPublish 9 to 7 - qos 1 - with code 0
+01:00.111	ID:5	client_5 --      -- topic 0 -- payload 16931 -- qos 1
+01:00.111	ID:1	broker -- PUBACK received
+01:00.112	ID:7	client_7 -- Received forwarded PUB from: 9
+01:00.114	ID:7	       --  id 9 -- topic 1  -- qos 1
+01:00.116	ID:5	client_5 -- PUBACK received
+01:00.117	ID:1	broker -- forwardPublish 9 to 9 - qos 1 - with code 0
+01:00.126	ID:1	broker -- PUBACK received
+01:00.127	ID:9	client_9 -- Received forwarded PUB from: 9
+01:00.129	ID:9	       --  id 9 -- topic 1  -- qos 1
+01:00.131	ID:1	broker -- forwardPublish 9 to 5 - qos 1 - with code 0
+01:00.135	ID:1	broker -- PUBACK received
+01:00.136	ID:5	client_5 -- Received forwarded PUB from: 9
+01:00.138	ID:5	       --  id 9 -- topic 1  -- qos 1
+01:00.139	ID:1	broker -- forwardPublish 9 to 8 - qos 0 - with code 0
+01:00.145	ID:8	client_8 -- Received forwarded PUB from: 9
+01:00.147	ID:1	broker -- forwardPublish 9 to 4 - qos 0 - with code 0
+01:00.148	ID:8	       --  id 9 -- topic 1  -- qos 0
+01:00.149	ID:4	client_4 -- Received forwarded PUB from: 9
+01:00.151	ID:4	       --  id 9 -- topic 1  -- qos 0
