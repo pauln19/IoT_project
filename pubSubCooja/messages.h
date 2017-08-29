@@ -9,7 +9,6 @@ enum {CONNACK=0, CONNECT=1};
 #define PUBLISHTIMER 7000
 #define NUMCLIENTS 20
 #define MSGBUFFSIZE 20
-#define NEW_PRINTF_SEMANTICS
 
 typedef struct my_sub {
     uint16_t address_id;
