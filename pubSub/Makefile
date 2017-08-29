@@ -1,4 +1,0 @@
-COMPONENT=pubSubAppC
-
-
-include $(MAKERULES)

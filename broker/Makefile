@@ -1,3 +1,0 @@
-COMPONENT=brokerAppC
-
-include $(MAKERULES)
